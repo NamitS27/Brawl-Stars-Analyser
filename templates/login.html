@@ -6,7 +6,6 @@
     <div class="box">
  
        <div class="title">LOGIN</div>
- 
        <div class="input">
           <label for="name">Player Tag</label>
           <input type="text" name="name" id="name">
@@ -24,6 +23,22 @@
        </div>
  
        <a href="" class="pass-forgot">Forgot your password?</a>
+       <div class="vali">
+         {% if flag==1 %}
+            <label class = "validate" style="text-align: center; display: block; margin: auto; position: relative; width: 600px; top: 420px; right: 300px;">Invalid Login ID or Password</label>
+         {% elif flag==2 %}
+            <label class = "validate" style="text-align: center; display: block; margin: auto; position: relative; width: 600px; top: 420px; right: 300px;">Invalid Credentials</label>
+         {% endif %}
+       </div>
+       
+       <!-- <div class="validate">
+         {% if flag==1 %}
+            <p class = "validate" style="text-align: center;">Invalid Login ID or Password</p>
+         {% elif flag==2 %}
+            <p class = "validate" style="text-align: center;">Invalid Credentials</p>
+         {% endif %}
+       </div> -->
+       
        <!-- {% if flag==1 %}
             <p class="incorrectpass" name="incorrectpass" id="incorrectpass">Invalid Tag or Password!!</p>
        {% elif flag==2 %}
@@ -31,6 +46,7 @@
        {% endif %} -->
  
     </div>
+   
     <div class="overbox">
        <div class="material-button alt-2"><span class="shape"></span></div>
  

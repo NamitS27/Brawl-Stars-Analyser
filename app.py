@@ -1,4 +1,4 @@
-from testing import *
+# from testing import *
 from get_data import *
 from flask import Flask, redirect, url_for, request, render_template
 import brawlstats
@@ -476,9 +476,9 @@ def log():
         cur = conn.cursor()
         cur.execute(kk)
         x = cur.fetchall()
-        x = x[0][0]
         print(x,' is the value of x')
         if len(x)>0:
+            x = x[0][0]
             user = str(x)
             print(user)
             plyer = client.get_player(user)
@@ -491,9 +491,9 @@ def log():
                 flag=1
             return render_template('result.html',d = li,flag=flag)
         else:
-            fla = x 
+            fla = 1
             print(fla)
-            return render_template('file.html',flag=fla)
+            return render_template('login.html',flag=fla)
 
 @app.route('/signup',methods=['POST','GET'])
 def signup():

@@ -4,12 +4,12 @@ from pprint import pprint
 import psycopg2
 from datetime import datetime
 
-global conn
+global conn 
 
-try:
-    conn = psycopg2.connect("dbname='brawlstats' user='postgres' host='localhost' password='Namit@2711'")
-except:
-    print("ERROR :(")
+# try:
+conn = psycopg2.connect("dbname='dbms' user='postgres' host='localhost' password='postgres'")
+# except:
+    # print("ERROR :(")
 
 cur = conn.cursor()
 
@@ -551,22 +551,22 @@ token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi0
 
 # Tag = 'Q80JYUJU'
 # try:
-client = brawlstats.OfficialAPI(token)
-tag = '2LJYR2UU'
-player = client.get_player(tag)
-parse_profile(player)
-club_details(player)
-battles = client.get_battle_logs(tag)
-Tag = "#{}".format(tag)
-count = insert_battle_det(battles,tag)
-print(count)
-for i in range(count):
-    print("BATTLE NUMBER : "+str(i+1))
-    # print(battles[i])
-    battle_log(battles[i],Tag)
-analysis(Tag)
-ind_event_page(Tag)
-ind_brawler(Tag)
+# client = brawlstats.OfficialAPI(token)
+# tag = '2LJYR2UU'
+# player = client.get_player(tag)
+# parse_profile(player)
+# club_details(player)
+# battles = client.get_battle_logs(tag)
+# Tag = "#{}".format(tag)
+# count = insert_battle_det(battles,tag)
+# print(count)
+# for i in range(count):
+#     print("BATTLE NUMBER : "+str(i+1))
+#     # print(battles[i])
+#     battle_log(battles[i],Tag)
+# analysis(Tag)
+# ind_event_page(Tag)
+# ind_brawler(Tag)
 # except:
 #     print("Doffa khotu kem nakhe che")
 
