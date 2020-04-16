@@ -1,4 +1,4 @@
-from testing import *
+# from testing import *
 from get_data import *
 from flask import Flask, redirect, url_for, request, render_template
 import brawlstats
