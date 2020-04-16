@@ -476,6 +476,7 @@ def log():
         cur = conn.cursor()
         cur.execute(kk)
         x = cur.fetchall()
+        x = x[0][0]
         print(x,' is the value of x')
         if len(x)>0:
             user = str(x)
