@@ -1,0 +1,74 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900&amp;subset=latin,latin-ext">
+
+<script src="{{url_for('static',filename='js/animatelogin.js')}}"></script>
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/animatelogin.css')}}">
+
+
+<div class="materialContainer">
+
+    <form action="/login" method="POST">
+        <div class="box">
+
+            <div class="title">LOGIN</div>
+            <p>{{flag}}</p>
+            <div class="input">
+                <label for="name">Username</label>
+                <input type="text" name="name" id="name">
+                <span class="spin"></span>
+            </div>
+    
+            <div class="input">
+                <label for="pass">Password</label>
+                <input type="password" name="pass" id="pass">
+                <span class="spin"></span>
+            </div>
+    
+            <div class="button login">
+                <button><span>GO</span> <i class="fa fa-check"></i></button>
+            </div>
+        </div>
+    </form>
+    
+    <form action="/signup" method="POST">
+        <div class="overbox">
+            <div class="material-button alt-2"><span class="shape"></span></div>
+    
+            <div class="title">REGISTER</div>
+    
+            <div class="input">
+                <label for="regmail">Email</label>
+                <input type="text" name="regmail" id="regmail">
+                <span class="spin"></span>
+            </div>
+    
+            <div class="input">
+                <label for="regname">Username</label>
+                <input type="text" name="regname" id="regname">
+                <span class="spin"></span>
+            </div>
+    
+            <div class="input">
+                <label for="regpass">Password</label>
+                <input type="password" name="regpass" id="regpass">
+                <span class="spin"></span>
+            </div>
+    
+            <div class="input">
+                <label for="reregpass">Repeat Password</label>
+                <input type="password" name="reregpass" id="reregpass">
+                <span class="spin"></span>
+            </div>
+    
+            <div class="button">
+                <button><span>NEXT</span></button>
+            </div>
+        </div>
+    </form>
+    
+
+</div>

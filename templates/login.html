@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}" type="text/css">
+<script type="text/javascript" src="{{url_for('static', filename='js/login.js')}}"></script>
+<!-- <script  src="{{ url_for('static', filename='js/login.js')}}" data-turbolinks-track="reload"></script> -->
+<!-- <form action="/login" method="POST"></form> -->
+<div class="materialContainer">
+    <div class="box">
+ 
+       <div class="title">LOGIN</div>
+ 
+       <div class="input">
+          <label for="name">Player Tag</label>
+          <input type="text" name="name" id="name">
+          <span class="spin"></span>
+       </div>
+ 
+       <div class="input">
+          <label for="pass">Password</label>
+          <input type="password" name="pass" id="pass">
+          <span class="spin"></span>
+       </div>
+ 
+       <div class="button login">
+          <button onclick="log()"><span>GO</span> <i class="fa fa-check"></i></button>
+       </div>
+ 
+       <a href="" class="pass-forgot">Forgot your password?</a>
+       <!-- {% if flag==1 %}
+            <p class="incorrectpass" name="incorrectpass" id="incorrectpass">Invalid Tag or Password!!</p>
+       {% elif flag==2 %}
+            <p class="incorrectpass" name="incorrectpass" id="incorrectpass">Invalid Credentials!!</p>    
+       {% endif %} -->
+ 
+    </div>
+    <div class="overbox">
+       <div class="material-button alt-2"><span class="shape"></span></div>
+ 
+       <div class="title">REGISTER</div>
+        
+       <div class="input">
+        <label for="regname">Email ID</label>
+        <input type="text" name="regmail" id="regmail">
+        <span class="spin"></span>
+       </div>
+
+       <div class="input">
+          <label for="regname">Player Tag</label>
+          <input type="text" name="regname" id="regname">
+          <span class="spin"></span>
+       </div>
+ 
+       <div class="input">
+          <label for="regpass">Password</label>
+          <input type="password" name="regpass" id="regpass">
+          <span class="spin"></span>
+       </div>
+ 
+       <div class="input">
+          <label for="reregpass">Repeat Password</label>
+          <input type="password" name="reregpass" id="reregpass">
+          <span class="spin"></span>
+       </div>
+ 
+       <div class="button">
+          <button onclick="signup()"><span>REGISTER</span></button>
+       </div>
+       <!-- {% if flag==1 %}
+            <p class="incorrectpass" name="incorrectpass" id="incorrectpass">Invalid Tag or Password!!</p>
+       {% elif flag==2 %}
+            <p class="incorrectpass" name="incorrectpass" id="incorrectpass">Invalid Credentials!!</p>    
+       {% endif %} -->
+    </div>
+ </div>
+ 
+<!-- </form> -->

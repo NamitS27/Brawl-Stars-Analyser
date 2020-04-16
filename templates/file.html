@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}" type="text/css">
+
+    <!-- <script type='text/javascript'>
+        function event(){
+
+        }
+    </script> -->
+</head>
+
+<body class="homebody">
+    <form action="/home" method="POST">
+        <div class="wrap">
+            <p>{{flag}}</p>
+            <div class="search">
+                <input type="text" class="searchTerm" name="ptag" placeholder="#">
+                <button type="submit" class="searchButton"></button>
+                <!-- <div class="searchImage" onclick=""></div> -->
+                <!-- </button> -->
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

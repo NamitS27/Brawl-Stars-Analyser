@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle Log</title>
+</head>
+<body>
+    <p>{{det}}</p>
+    {% for i in det %}
+        <p>Event Mode {{i[0]}}</p>
+        <p>Event Map {{i[1]}}</p>
+        {% if i[2]==0 %}
+            <p>Battle Result {{i[4]}}</p>
+            {% for j in range(5,29,4) %}
+                <p> Player_Name {{i[j]}} </p>
+                {% if loop.index==i[3]+1 %}
+                    <p>Star Player</p>
+                {% endif %}
+                <p>Brawler {{i[j+1]}}</p>
+                <p>Power {{i[j+2]}}</p>
+                <p>Trophies {{i[j+3]}}</p>
+                <p></p>
+            {% endfor %}
+        {% else %}
+            <p>Battle Rank {{i[4]}}</p>
+            {% for j in range(4,40,4) %}
+                <p> Player_Name {{i[j]}} </p>
+                <p>Brawler {{i[j+1]}}</p>
+                <p>Power {{i[j+2]}}</p>
+                <p>Trophies {{i[j+3]}}</p>
+                <p></p>
+            {% endfor %}    
+        {% endif %}
+        <br>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brawler Info</title>
+</head>
+<body>
+    {% for i in det %}
+        <p>{{i}}</p>
+    {% endfor %}
+    {% for i in dd%}
+        {% for j in i%}
+            <p>{{j}}</p>
+        {% endfor %} 
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Player Info </title>
+</head>
+<body>
+    <form action="http://localhost:5000/brawler" method="GET">
+        {% for i in result %}
+            <p>{{i}}</p>
+        {% endfor %}
+        <button name="brawler_info" onclick="testmet()">Brawler Info</button>
+        <!-- <button name="club_info" onclick="club_det()">Club Info</button> -->
+    </form>
+    <form action="http://localhost:5000/club" method="GET">
+        <button name="club_info" onclick="club_det()">Club Info</button>
+    </form>
+</body>
+</html>
