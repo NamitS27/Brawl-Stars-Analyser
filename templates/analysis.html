@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div class="analysis-constainer" style="background-color: #fd7b52;">
+<p style="left: 50%; text-align: center;">Title</p>  
+<div class="row" style="align-items: center;align-self: center; height: 400px;">
+  <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left: 20%; top: 20%;">
+    Overall Win Rate
+  </div>
+  <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left: 20%; top: 20%;">
+    <div class="teamteam" style="height: 40%; float: top;"> Team Win Rate</div>
+    <div class="teamteam" style="height: 40%; float: top;"> 
+      <div style="height: 33%;">Showdown Win Rate</div>
+      <div style="height: 33%; left: 50%;">Duo Win</div>
+      <div style="height: 33%; left: 50%;">Solo Win</div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-4 col-sm-4 col-xs-4" style="padding: 5px 10px; left: 20%;" >
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id = "tdd">Event Mode
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href="#">HTML</a></li>
+          <li><a href="#">CSS</a></li>
+          <li><a href="#">JavaScript</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="col-lg-4 col-sm-4 col-xs-4" style="padding: 5px 10px; left: 20%;">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id = "dd">Showdown Type
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Solo Showdown</a></li>
+          <li><a href="#">Duo Showdown</a></li>
+          <li><a href="#">Both</a></li>
+        </ul>
+      </div>
+  </div>
+  <div class="col-lg-4 col-sm-4 col-xs-4" style="padding: 5px 10px; left: 20%;">
+    <div class="buttonn">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" onclick="analyse()" >GO
+    </div>
+</div>
+  
+</div>
+</div>
+<div class="obt_data" id="">
+  <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left:20%;width: 50%;" id="tabl1">
+    
+  </div>
+  <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left:20%;width: 50%;" id="tabl2">
+    
+  </div>
+</div>
+
+<script>
+  function analyse(){
+  $.ajax(
+      {
+          type: "POST",
+          url: "{{ url_for('page_analysis') }}",
+          data: {
+              team_data: document.getElementById("tdd").value,
+              sd_data: document.getElementById("dd").value
+          },
+          success: function (data) {
+              document.getElementById("popup-form").innerHTML = '<table><thead><tr><th>Event Map</th><th>Win Percent</th></tr></thead><tbody><tr><td>Hello</td><td>World</td></tr><tr><td>Its</td><td>Working</td></tr></tbody></table>';
+              document.getElementById("popup_hide").style.display = "block";
+          }
+      })
+}
+</script>

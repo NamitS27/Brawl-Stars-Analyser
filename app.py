@@ -4,12 +4,12 @@ from flask import Flask, redirect, url_for, request, render_template
 import brawlstats
 
 app = Flask(__name__)
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImU4OGMwNzMxLWYyNmEtNGVmOC1iNWVkLTE3ZDA5OGJjMzU1MCIsImlhdCI6MTU4NDk2OTQ0OSwic3ViIjoiZGV2ZWxvcGVyLzhlZTEwM2Y3LWY2OTUtM2U1MC05MGI1LTk2OGIxOTY5NWZiOSIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTAzLjg1LjkuMjU1Il0sInR5cGUiOiJjbGllbnQifV19.KC2p075pfN3tJthbbXf7cBxdi-7-Ipap9gwY0rWVV5_HlszR0BwkqdPSuSqeQvngdkkvq-y5LAkCPu3yIoQN1g'
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjVlYWVlN2RhLWUxMTEtNDhmMS1iNDE0LTU2ZTBjNGRkNWFlZCIsImlhdCI6MTU4NzExMTM5Nywic3ViIjoiZGV2ZWxvcGVyL2Q3M2ExZDFhLTFlOTQtMzQ1Mi1iODViLTFjZTA3NTc2YTVmZCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTU3LjMyLjIxMi4yMTEiXSwidHlwZSI6ImNsaWVudCJ9XX0.vBCGt_CvYahSnV26RGACD-tCOXsiqD441cFXBJxGIOeZxueB5FwwVuzabMUC85y-PkAKOa0DV1ktbDEzcW6W0A'
 import psycopg2
 global conn
 
 try:
-    conn = psycopg2.connect("dbname='dbms' user='postgres' host='localhost' password='1288'")
+    conn = psycopg2.connect("dbname='dbms' user='postgres' host='localhost' password='postgres'")
 except:
     print("ERROR :(")
 
@@ -488,6 +488,13 @@ user = None
 
 # plyer = brawlstats.officialapi.models.Player() 
 
+
+def page_analysis():
+    x = request.form['team_data']
+    y = request.form['sd_data']
+    return jsonify(x)
+
+
 @app.route('/login',methods=['POST','GET'])
 def log():
     global user
@@ -503,29 +510,29 @@ def log():
         cur = conn.cursor()
         cur.execute(kk)
         x = cur.fetchall()
-        print(x,' is the value of x')
-        fla = x
-        print(fla)
-        print('HEY')
-        return render_template('file.html', flag=fla)
-        # if len(x)>0:
-        #     x = x[0][0]
-        #     user = str(x)
-        #     print(user)
-        #     plyer = client.get_player(user)
-        #     print(type(plyer))
-        #     print(user)
-        #     li = get_profile(plyer)
-        #     zzz = plyer.get_club()
-        #     flag=0
-        #     if zzz is not None:
-        #         flag=1
-        #     return render_template('result.html',d = li,flag=flag)
-        # else:
-        #     fla = x
-        #     print(fla)
-        #     print('HEY')
-        #     return render_template('login.html',flag=fla)
+        # print(x,' is the value of x')
+        # fla = x
+        # print(fla)
+        # print('HEY')
+        # return render_template('file.html', flag=fla)
+        if len(x)>0:
+            x = x[0][0]
+            user = str(x)
+            print(user)
+            plyer = client.get_player(user)
+            print(type(plyer))
+            print(user)
+            li = get_profile(plyer)
+            zzz = plyer.get_club()
+            flag=0
+            if zzz is not None:
+                flag=1
+            return render_template('result.html',d = li,flag=flag)
+        else:
+            fla = x
+            print(fla)
+            print('HEY')
+            return render_template('login.html',flag=fla)
 
 @app.route('/signup',methods=['POST','GET'])
 def signup():
@@ -602,7 +609,7 @@ def battles_show():
     for i in range(count):
         print("BATTLE NUMBER : "+str(i+1))
         battle_log(battles[i],Utag)
-    query_check = "SELECT battle_time,event_mode,event_map FROM battle_det WHERE tag = '"+Utag+"' ORDER BY battle_time DESC LIMIT 25;"
+    query_check = "SELECT battle_time,event_mode,event_map,trophy_change FROM battle_det WHERE tag = '"+Utag+"' ORDER BY battle_time DESC LIMIT 25;"
     cur = conn.cursor()
     cur.execute(query_check)
     x = cur.fetchall()
@@ -639,7 +646,7 @@ def battles_show():
                     tem.append(j[9])#name
                     tem.append(j[10])#power
                     tem.append(j[11])#trophies
-            
+                tem.append(x[i][3])#trophy_change    
             else:
                 quer = "SELECT * FROM battle_solo WHERE tag = '{}' AND battle_time = '{}' ORDER BY battle_rank;".format(Utag,x[i][0])
                 cur = conn.cursor()
@@ -664,7 +671,7 @@ def battles_show():
                         tem.append(j[6])#name
                         tem.append(j[7])#power
                         tem.append(j[8])#trophies
-                
+                     tem.append(x[i][3])#trophy_change
                 else:
                     quer = "SELECT * FROM battle_duo WHERE tag = '{}' AND battle_time = '{}' ORDER BY team_rank;".format(Utag,x[i][0])
                     cur = conn.cursor()
@@ -688,10 +695,11 @@ def battles_show():
                             tem.append(j[6])#name
                             tem.append(j[7])#power
                             tem.append(j[8])#trophies
+                        tem.append(x[i][3])#trophy_change    
             
             fin.append(tem)
         print(fin)    
-        return render_template('battles.html',det = fin)
+        return render_template('battle.html',det = fin)
 
 
 @app.route('/brawler',methods=['POST','GET'])

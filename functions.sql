@@ -1,7 +1,7 @@
-<<<<<<< HEAD
-=======
 -- <<<<<<< HEAD
->>>>>>> a2dee79ba125e6a7a8537cb01ed582596ce87b1a
+-- =======
+-- <<<<<<< HEAD
+-- >>>>>>> a2dee79ba125e6a7a8537cb01ed582596ce87b1a
 -- Winning Percentage for a player's team events
 select sum(wins),sum(games_played) Winning_Percentage from team_analysis where tag = '#2LJYR2UU'
 
@@ -89,12 +89,12 @@ where
 group by
 	event_map,brawler_name
 	
-<<<<<<< HEAD
+-- <<<<<<< HEAD
 
 -- UPTO HERE DONE
 
-=======
->>>>>>> a2dee79ba125e6a7a8537cb01ed582596ce87b1a
+-- =======
+-- >>>>>>> a2dee79ba125e6a7a8537cb01ed582596ce87b1a
 -- Overall Brawler's performance 
 select
 	brawler_name,sum(wins),sum(games_played)
@@ -179,7 +179,7 @@ select floor(avg(brawler_trophies)),floor(avg(brawler_rank)),floor(avg(brawler_p
 
 select * from brawlers order by brawler_highest_trophies
 
-<<<<<<< HEAD
+-- <<<<<<< HEAD
 -- select 
 -- 	event_mode,event_map,sum(wins),sum(games_played) 
 -- from 
@@ -387,4 +387,4 @@ select floor(avg(brawler_trophies)),floor(avg(brawler_rank)),floor(avg(brawler_p
 
 select * from brawlers order by brawler_highest_trophies
 -- >>>>>>> 873f84f4c9607c5ee044b93235d8fea3ebeedd3d
->>>>>>> a2dee79ba125e6a7a8537cb01ed582596ce87b1a
+-- >>>>>>> a2dee79ba125e6a7a8537cb01ed582596ce87b1a
