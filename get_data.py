@@ -7,7 +7,7 @@ from datetime import datetime
 global conn 
 
 # try:
-conn = psycopg2.connect("dbname='dbms' user='postgres' host='localhost' password='postgres'")
+conn = psycopg2.connect("dbname='dbms' user='postgres' host='localhost' password='1288'")
 # except:
     # print("ERROR :(")
 

@@ -1,38 +1,15 @@
-# from testing import *
 from get_data import *
 from flask import Flask, redirect, url_for, request, render_template
+
 import brawlstats
+
 app = Flask(__name__)
-# <<<<<<< HEAD
-# =======
-# <<<<<<< HEAD
-# token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImY1MzVlMjUxLTg2MzEtNGRjMC05OWNmLWU4YTI5M2QwYzllYSIsImlhdCI6MTU4NjYwMzQzMiwic3ViIjoiZGV2ZWxvcGVyLzhlZTEwM2Y3LWY2OTUtM2U1MC05MGI1LTk2OGIxOTY5NWZiOSIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTAzLjg1LjkuMjU1Il0sInR5cGUiOiJjbGllbnQifV19.7dHdwjuLA9DEM8DPXR6twn8byfKiqIu7K1iiYf_TwnoAdOekLyyWJcYq6NCccM8r0KmeNKCaMglRekGrDdQdOw'
-# =======
-# user=""
-# <<<<<<< HEAD
-# token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImEwY2JiYzFjLWRhMGQtNDFiYy05NTYwLWJiYjIyOGI1ZjAwNSIsImlhdCI6MTU4NjA2MDI1Miwic3ViIjoiZGV2ZWxvcGVyL2IwZDZiNDk4LTFlYWMtMTM1Ni1hMTllLTYwZTlmMzQ0YmY3NCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTA2LjIxMy4yMTQuNTkiXSwidHlwZSI6ImNsaWVudCJ9XX0.fLXulKIjeGdig_krFBRfXy9vZgr6Ky0x0BW7hgl0Mh83RUhOHQr4khnK1rp_FF4gx_tBnEbbLb9H3FZBBc5uMA'
-
-# tagg = sys.argv[1]
-# print(type(tagg))
-# >>>>>>> 873f84f4c9607c5ee044b93235d8fea3ebeedd3d
-
-# token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImM5ZTJlNWY2LWJkNjUtNGNjMC1iZWZhLWI0OGM5N2FkODhhOCIsImlhdCI6MTU4NjY3MjM1Mywic3ViIjoiZGV2ZWxvcGVyL2Q3M2ExZDFhLTFlOTQtMzQ1Mi1iODViLTFjZTA3NTc2YTVmZCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTU3LjMyLjcwLjI0NyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.Xnk51VrCu3yDcwHjdMU9GsT9yrPn8OYplezyVwMWI_-u326ZyEaNdk78Sd4eIN3PwVGJLruxdj9EXJF_ke28Mg'
-
-# <<<<<<< HEAD
-# =======
-# =======
-# <<<<<<< HEAD
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjQyNTc3YjJiLTZlZWQtNDVjOC05ZDE0LTM3ZmM4NmJmN2NlYiIsImlhdCI6MTU4NzAwOTgwMCwic3ViIjoiZGV2ZWxvcGVyL2Q3M2ExZDFhLTFlOTQtMzQ1Mi1iODViLTFjZTA3NTc2YTVmZCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTU3LjMyLjIwOS4yNTIiXSwidHlwZSI6ImNsaWVudCJ9XX0.ZIcR_aWKmaeUnld0XYBUr3V4_vVA4HvuvCk51XqbijgjseoshKxD-28Ew5rrtBh63WCs0J7cAsYcg_IPqAFquw'
-# >>>>>>> template for brawler details added
-# >>>>>>> 4d790ba42ea39720380a1d4f237ed0d4b6b7af96
-# >>>>>>> 873f84f4c9607c5ee044b93235d8fea3ebeedd3d
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImU4OGMwNzMxLWYyNmEtNGVmOC1iNWVkLTE3ZDA5OGJjMzU1MCIsImlhdCI6MTU4NDk2OTQ0OSwic3ViIjoiZGV2ZWxvcGVyLzhlZTEwM2Y3LWY2OTUtM2U1MC05MGI1LTk2OGIxOTY5NWZiOSIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTAzLjg1LjkuMjU1Il0sInR5cGUiOiJjbGllbnQifV19.KC2p075pfN3tJthbbXf7cBxdi-7-Ipap9gwY0rWVV5_HlszR0BwkqdPSuSqeQvngdkkvq-y5LAkCPu3yIoQN1g'
 import psycopg2
-from csv import writer,reader
-import pandas as pd
 global conn
 
 try:
-    conn = psycopg2.connect("dbname='dbms' user='postgres' host='localhost' password='postgres'")
+    conn = psycopg2.connect("dbname='dbms' user='postgres' host='localhost' password='1288'")
 except:
     print("ERROR :(")
 
@@ -477,23 +454,28 @@ def log():
         cur.execute(kk)
         x = cur.fetchall()
         print(x,' is the value of x')
-        if len(x)>0:
-            x = x[0][0]
-            user = str(x)
-            print(user)
-            plyer = client.get_player(user)
-            print(type(plyer))
-            print(user)
-            li = get_profile(plyer)
-            zzz = plyer.get_club()
-            flag=0
-            if zzz is not None:
-                flag=1
-            return render_template('result.html',d = li,flag=flag)
-        else:
-            fla = 1
-            print(fla)
-            return render_template('login.html',flag=fla)
+        fla = x
+        print(fla)
+        print('HEY')
+        return render_template('file.html', flag=fla)
+        # if len(x)>0:
+        #     x = x[0][0]
+        #     user = str(x)
+        #     print(user)
+        #     plyer = client.get_player(user)
+        #     print(type(plyer))
+        #     print(user)
+        #     li = get_profile(plyer)
+        #     zzz = plyer.get_club()
+        #     flag=0
+        #     if zzz is not None:
+        #         flag=1
+        #     return render_template('result.html',d = li,flag=flag)
+        # else:
+        #     fla = x
+        #     print(fla)
+        #     print('HEY')
+        #     return render_template('login.html',flag=fla)
 
 @app.route('/signup',methods=['POST','GET'])
 def signup():
@@ -680,12 +662,7 @@ def club_det():
     print(user)
     plyer = client.get_player(user)
     l,ll = club_detai(plyer)
-    return render_template('clubdetails.html',det = l,dd=ll)
-# @app.route('/brawler',methods=['POST','GET'])
-# def club_det():
-#     if request.method=='GET':
-#         return "Hello World"
-# >>>>>>> 4d790ba42ea39720380a1d4f237ed0d4b6b7af96
+    return render_template('club_details.html',det = l,dd=ll)
 
 
 @app.route('/')
