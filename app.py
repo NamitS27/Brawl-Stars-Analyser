@@ -1,34 +1,11 @@
-# from testing import *
 from get_data import *
 from flask import Flask, redirect, url_for, request, render_template
+
 import brawlstats
+
 app = Flask(__name__)
-# <<<<<<< HEAD
-# =======
-# <<<<<<< HEAD
-# token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImY1MzVlMjUxLTg2MzEtNGRjMC05OWNmLWU4YTI5M2QwYzllYSIsImlhdCI6MTU4NjYwMzQzMiwic3ViIjoiZGV2ZWxvcGVyLzhlZTEwM2Y3LWY2OTUtM2U1MC05MGI1LTk2OGIxOTY5NWZiOSIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTAzLjg1LjkuMjU1Il0sInR5cGUiOiJjbGllbnQifV19.7dHdwjuLA9DEM8DPXR6twn8byfKiqIu7K1iiYf_TwnoAdOekLyyWJcYq6NCccM8r0KmeNKCaMglRekGrDdQdOw'
-# =======
-# user=""
-# <<<<<<< HEAD
-# token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImEwY2JiYzFjLWRhMGQtNDFiYy05NTYwLWJiYjIyOGI1ZjAwNSIsImlhdCI6MTU4NjA2MDI1Miwic3ViIjoiZGV2ZWxvcGVyL2IwZDZiNDk4LTFlYWMtMTM1Ni1hMTllLTYwZTlmMzQ0YmY3NCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTA2LjIxMy4yMTQuNTkiXSwidHlwZSI6ImNsaWVudCJ9XX0.fLXulKIjeGdig_krFBRfXy9vZgr6Ky0x0BW7hgl0Mh83RUhOHQr4khnK1rp_FF4gx_tBnEbbLb9H3FZBBc5uMA'
-
-# tagg = sys.argv[1]
-# print(type(tagg))
-# >>>>>>> 873f84f4c9607c5ee044b93235d8fea3ebeedd3d
-
-# token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImM5ZTJlNWY2LWJkNjUtNGNjMC1iZWZhLWI0OGM5N2FkODhhOCIsImlhdCI6MTU4NjY3MjM1Mywic3ViIjoiZGV2ZWxvcGVyL2Q3M2ExZDFhLTFlOTQtMzQ1Mi1iODViLTFjZTA3NTc2YTVmZCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTU3LjMyLjcwLjI0NyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.Xnk51VrCu3yDcwHjdMU9GsT9yrPn8OYplezyVwMWI_-u326ZyEaNdk78Sd4eIN3PwVGJLruxdj9EXJF_ke28Mg'
-
-# <<<<<<< HEAD
-# =======
-# =======
-# <<<<<<< HEAD
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjQyNTc3YjJiLTZlZWQtNDVjOC05ZDE0LTM3ZmM4NmJmN2NlYiIsImlhdCI6MTU4NzAwOTgwMCwic3ViIjoiZGV2ZWxvcGVyL2Q3M2ExZDFhLTFlOTQtMzQ1Mi1iODViLTFjZTA3NTc2YTVmZCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTU3LjMyLjIwOS4yNTIiXSwidHlwZSI6ImNsaWVudCJ9XX0.ZIcR_aWKmaeUnld0XYBUr3V4_vVA4HvuvCk51XqbijgjseoshKxD-28Ew5rrtBh63WCs0J7cAsYcg_IPqAFquw'
-# >>>>>>> template for brawler details added
-# >>>>>>> 4d790ba42ea39720380a1d4f237ed0d4b6b7af96
-# >>>>>>> 873f84f4c9607c5ee044b93235d8fea3ebeedd3d
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjVlYWVlN2RhLWUxMTEtNDhmMS1iNDE0LTU2ZTBjNGRkNWFlZCIsImlhdCI6MTU4NzExMTM5Nywic3ViIjoiZGV2ZWxvcGVyL2Q3M2ExZDFhLTFlOTQtMzQ1Mi1iODViLTFjZTA3NTc2YTVmZCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTU3LjMyLjIxMi4yMTEiXSwidHlwZSI6ImNsaWVudCJ9XX0.vBCGt_CvYahSnV26RGACD-tCOXsiqD441cFXBJxGIOeZxueB5FwwVuzabMUC85y-PkAKOa0DV1ktbDEzcW6W0A'
 import psycopg2
-from csv import writer,reader
-import pandas as pd
 global conn
 
 try:
@@ -287,6 +264,7 @@ client = brawlstats.OfficialAPI(token)
 #         lisl.append(pint_teams(tag,str(convert(detls[7])),time_extract(detls[0]),'DRAW',2,deft,star_ply_tg))
 #     return li,lisl    
 
+
 def club_detai(play):
     l = []
     club = play.get_club()
@@ -299,22 +277,71 @@ def club_detai(play):
     l.append("CLUB DESC : "+club.description)
     mem = club.get_members()
     ll =[]
+    tag=[]
+    name=[]
+    name_colour=[]
+    role=[]
+    trophies=[]
     for pla in mem:
         ll.append(get_club_plyer_det(pla))
-    return l,ll
-
+        tag.append(get_tag(pla))
+        name.append(get_name((pla)))
+        name_colour.append(get_name_colour(pla))
+        role.append(get_role(pla))
+        trophies.append(get_trophies(pla))
+    return l, ll, tag, name, name_colour, role, trophies
 
 
 def get_club_plyer_det(player_det):
+    tag = []
+    name =[]
+    name_colour = []
+    role = []
+    trophies = []
     l = []
     l.append("---------------------------------------------------------------------")
     l.append("Tag : "+player_det.tag)
+    tag.append(player_det.tag)
     l.append("Name : "+player_det.name)
+    name.append(player_det.name)
     l.append("Name Color : "+player_det.name_color)
+    name_colour.append(player_det.name_color)
     l.append("Role : "+player_det.role)
+    role.append(player_det.role)
     l.append("Trophies : "+str(player_det.trophies))
+    trophies.append(player_det.trophies)
     l.append("---------------------------------------------------------------------")
     return l
+
+
+def get_tag(player_det):
+    tag = []
+    tag.append(player_det.tag)
+    return tag
+
+
+def get_name(player_det):
+    name = []
+    name.append(player_det.name)
+    return name
+
+
+def get_name_colour(player_det):
+    name_colour = []
+    name_colour.append(player_det.name_color)
+    return name_colour
+
+
+def get_role(player_det):
+    role = []
+    role.append(player_det.role)
+    return role
+
+
+def get_trophies(player_det):
+    trophies = []
+    trophies.append(player_det.trophies)
+    return trophies
 
 
 def get_prof(prof_list):
@@ -461,6 +488,13 @@ user = None
 
 # plyer = brawlstats.officialapi.models.Player() 
 
+
+def page_analysis():
+    x = request.form['team_data']
+    y = request.form['sd_data']
+    return jsonify(x)
+
+
 @app.route('/login',methods=['POST','GET'])
 def log():
     global user
@@ -476,7 +510,11 @@ def log():
         cur = conn.cursor()
         cur.execute(kk)
         x = cur.fetchall()
-        print(x,' is the value of x')
+        # print(x,' is the value of x')
+        # fla = x
+        # print(fla)
+        # print('HEY')
+        # return render_template('file.html', flag=fla)
         if len(x)>0:
             x = x[0][0]
             user = str(x)
@@ -491,8 +529,9 @@ def log():
                 flag=1
             return render_template('result.html',d = li,flag=flag)
         else:
-            fla = 1
+            fla = x
             print(fla)
+            print('HEY')
             return render_template('login.html',flag=fla)
 
 @app.route('/signup',methods=['POST','GET'])
@@ -570,7 +609,7 @@ def battles_show():
     for i in range(count):
         print("BATTLE NUMBER : "+str(i+1))
         battle_log(battles[i],Utag)
-    query_check = "SELECT battle_time,event_mode,event_map FROM battle_det WHERE tag = '"+Utag+"' ORDER BY battle_time DESC LIMIT 25;"
+    query_check = "SELECT battle_time,event_mode,event_map,trophy_change FROM battle_det WHERE tag = '"+Utag+"' ORDER BY battle_time DESC LIMIT 25;"
     cur = conn.cursor()
     cur.execute(query_check)
     x = cur.fetchall()
@@ -607,7 +646,7 @@ def battles_show():
                     tem.append(j[9])#name
                     tem.append(j[10])#power
                     tem.append(j[11])#trophies
-            
+                tem.append(x[i][3])#trophy_change    
             else:
                 quer = "SELECT * FROM battle_solo WHERE tag = '{}' AND battle_time = '{}' ORDER BY battle_rank;".format(Utag,x[i][0])
                 cur = conn.cursor()
@@ -632,7 +671,7 @@ def battles_show():
                         tem.append(j[6])#name
                         tem.append(j[7])#power
                         tem.append(j[8])#trophies
-                
+                     tem.append(x[i][3])#trophy_change
                 else:
                     quer = "SELECT * FROM battle_duo WHERE tag = '{}' AND battle_time = '{}' ORDER BY team_rank;".format(Utag,x[i][0])
                     cur = conn.cursor()
@@ -656,10 +695,11 @@ def battles_show():
                             tem.append(j[6])#name
                             tem.append(j[7])#power
                             tem.append(j[8])#trophies
+                        tem.append(x[i][3])#trophy_change    
             
             fin.append(tem)
         print(fin)    
-        return render_template('battles.html',det = fin)
+        return render_template('battle.html',det = fin)
 
 
 @app.route('/brawler',methods=['POST','GET'])
@@ -679,13 +719,9 @@ def club_det():
     # global user
     print(user)
     plyer = client.get_player(user)
-    l,ll = club_detai(plyer)
-    return render_template('clubdetails.html',det = l,dd=ll)
-# @app.route('/brawler',methods=['POST','GET'])
-# def club_det():
-#     if request.method=='GET':
-#         return "Hello World"
-# >>>>>>> 4d790ba42ea39720380a1d4f237ed0d4b6b7af96
+    l,ll,tag, name, name_colour, role, trophies = club_detai(plyer)
+    number_of_players = len(ll)
+    return render_template('club_details.html', det=l, dd=ll, player_number=number_of_players, tag=tag, name=name, name_colour=name_colour, role=role, trophies=trophies)
 
 
 @app.route('/')

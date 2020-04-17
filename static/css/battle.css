@@ -1,0 +1,381 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900);
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  background: -webkit-gradient(linear, left top, left bottom, from(#8c7a7a), color-stop(65%, #af877c), to(#af877c)) fixed;
+  background: linear-gradient(to bottom, #8c7a7a 0%, #af877c 65%, #af877c 100%) fixed;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/coc-background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font: 12px/20px "Lato", Arial, sans-serif;
+  color: #9E9E9E;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+@media screen and (min-width: 1400px) {
+  .grid-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1300px);
+  grid-template-rows: repeat(25, 366.847px);
+  grid-gap: 120px;
+  /* height: 609.847px  ; */
+  margin: auto;
+  /* max-width: 1200px; */
+  left:500px;
+  justify-content: center;
+}
+}
+
+@media screen and (max-width: 1400px) {
+  .grid-container {
+  display: grid;
+  grid-template-columns: repeat(1, 300px);
+  grid-template-rows: repeat(36, 484.847px);
+  grid-gap: 120px;
+  /* height: 609.847px  ; */
+  margin: auto;
+  max-width: 1200px;
+  justify-content: center;
+}
+}
+
+.brawl-card {
+  background:white;
+  width: 1300px;
+  display: inline-block;
+  /* margin: auto; */
+  border-radius: 19px;
+  position: relative;
+  text-align: center;
+  box-shadow: -1px 15px 30px -12px black;
+  z-index: 9999;
+  /* margin: 40px 85px; */
+  /* transform: scale(1.12); */
+  /* z-index: 10; */
+  /* margin-bottom: 40px; */
+  /* padding-top: 40px; */
+  /* padding-bottom: 40px; */
+  outline: none;
+}
+/* 
+.brawl-card:hover {
+  transform: scale(1.12);
+  z-index: 10;
+} */
+
+.brawl-card__image {
+  position: relative;
+  height: 230px;
+  margin-bottom: 35px;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+
+.brawl-card__image {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian-bg.jpg");
+}
+.brawl-card__image img {
+  width: 400px;
+  position: absolute;
+  top: -65px;
+  left: -70px;
+}
+
+.brawl-card__level {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.brawl-card__level--barbarian {
+  color: #EC9B3B;
+}
+
+.brawl-card__level--archer {
+  color: #EE5487;
+}
+
+.brawl-card__level--giant {
+  color: #F6901A;
+}
+
+.brawl-card__level--goblin {
+  color: #82BB30;
+}
+
+.brawl-card__level--wizard {
+  color: #4FACFF;
+}
+
+.brawl-card__unit-name {
+  font-size: 26px;
+  color: black;
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+
+.brawl-card__unit-description {
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.brawl-card__unit-stats--barbarian {
+  background: #EC9B3B;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+
+.brawl-card__unit-stats--barbar {
+  background: #914c4c;
+  height: 70px;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+
+.brawl-card__unit-stats--barbarian .one-half {
+  border-right: 1px solid #BD7C2F;
+  border-left: 1px solid #BD7C2F;
+  border-bottom: 1px solid #BD7C2F;
+}
+
+/* .brawl-card__unit-stats--barbarian .one-third {
+  border-right: 1px solid #BD7C2F;
+} */
+
+.brawl-card__unit-stats--archer {
+  background: #EE5487;
+}
+.brawl-card__unit-stats--archer .one-third {
+  border-right: 1px solid #D04976;
+}
+
+.brawl-card__unit-stats--giant {
+  background: #F6901A;
+}
+.brawl-card__unit-stats--giant .one-third {
+  border-right: 1px solid #de7b09;
+}
+
+.brawl-card__unit-stats--goblin {
+  background: #82BB30;
+}
+.brawl-card__unit-stats--goblin .one-third {
+  border-right: 1px solid #71a32a;
+}
+
+.brawl-card__unit-stats--wizard {
+  background: #4FACFF;
+}
+.brawl-card__unit-stats--wizard .one-third {
+  border-right: 1px solid #309eff;
+}
+
+.brawl-card__unit-stats {
+  color: white;
+  font-weight: 700;
+}
+
+.brawl-card__unit-stay {
+  color: white;
+  font-weight: 700;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.brawl-card__unit-stats .one-third {
+  width: 38.46%;
+  float: left;
+  padding: 10px 0px;
+}
+
+.brawl-card__unit-stats .one-two {
+  /* width: 38.46%; */
+  height: 50%;
+  float: top;
+  padding: 10px 0px;
+}
+
+.brawl-card__unit-stats .tit {
+  width: 80%;
+  float: left;
+  padding: 2px 15px;
+}
+
+.brawl-card__unit-stats .titu {
+  width: 20%;
+  float: left;
+  padding: 2px 15px;
+}
+
+/* .brawl-card__unit-stats .one-thir {
+    width: 23.07%;
+    float: left;
+    padding: 20px 15px;
+} */
+
+.brawl-card__unit-stats .one-half {
+  width: 23.07%;
+  float: left;
+  padding: 5px 15px;
+  height:100%;
+  /* border-right:black; */
+}
+
+.brawl-card__unit-stay sup {
+  position: absolute;
+  bottom: 4px;
+  font-size: 45%;
+  margin-left: 2px;
+}
+/* .brawl-card__unit-stay .stat {
+  position: relative;
+  font-size: 24px;
+  margin-bottom: 10px;
+} */
+/* .brawl-card__unit-stay .statr {
+  position: relative;
+  font-size: 24px;
+  margin-bottom: 10px;
+  width:33%;
+} */
+
+/* .one-third .inf{
+  position: relative;
+  font-size: 18px;
+  margin-bottom: 10px;
+  height: 80px;
+} */
+
+
+.inf .bradet {
+  top: 20px;
+  width: 16.66%;
+  font-size: 12px;
+  height:78px;
+  float: left;
+  border-right: 1px solid #9E9E9E;
+  /* background-color: #914c4c; */
+  padding: 1px 1px;
+}
+
+.stat .imgstat {
+  width: 33%;
+  height:155.09px;
+  float: left;
+  padding: 5px 5px;
+}
+
+
+.showd .imshowa {
+  height: 60%;
+  /* height:155.09px; */
+  float: top;
+  padding: 2px 3px;
+}
+
+.showd .imshowb {
+  height: 20%;
+  /* height:155.09px; */
+  float: top;
+  border-right: 1px solid #9E9E9E;
+  background-color: #914c4c;
+  padding: 2px 0px;
+}
+
+.stat-value .midd {
+  /* width: 33%; */
+  height:60%;
+  float: top;
+  padding: 0px 0px;
+}
+
+
+.stat-value .mii {
+  /* width: 33%; */
+  height:40%;
+  float: top;
+  padding: 5px 5px;
+}
+/* .one-half .stat-value {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 12px;
+} */
+
+
+.brawl-card__unit-stay .no-border {
+  border-right: none;
+}
+
+
+.brawl-card__unit-stats sup {
+  position: absolute;
+  bottom: 4px;
+  font-size: 45%;
+  margin-left: 2px;
+}
+
+.brawl-card__unit-stats .stat {
+  position: relative;
+  font-size: 24px;
+  margin-bottom: 10px;
+  height: 155.09px;
+}
+
+.brawl-card__unit-stats .showd {
+  position: relative;
+  font-size: 14px;
+  margin-bottom: 10px;
+  width: 20%;
+  float: left;
+  /* height: 155.09px; */
+}
+
+.brawl-card__unit-stats .inf {
+  position: relative;
+  font-size: 24px;
+  margin-bottom: 10px;
+  background-color: #914c4c;
+  height: 80px;
+}
+
+.brawl-card__unit-stats .statr {
+  position: relative;
+  font-size: 24px;
+  margin-bottom: 10px;
+  height: 80px;
+}
+
+.brawl-card__unit-stats .stat-value {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 12px;
+  height: 376.83px;
+}
+
+.brawl-card__unit-stats .no-border {
+  border-right: none;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+.slick-prev {
+  left: 100px;
+  z-index: 999;
+}
+
+.slick-next {
+  right: 100px;
+  z-index: 999;
+}
