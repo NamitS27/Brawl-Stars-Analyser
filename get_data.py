@@ -6,10 +6,10 @@ from datetime import datetime
 
 global conn 
 
-# try:
-conn = psycopg2.connect("dbname='dbms' user='postgres' host='localhost' password='postgres'")
-# except:
-    # print("ERROR :(")
+try:
+    conn = psycopg2.connect("dbname='brawlstats' user='postgres' host='localhost' password='Namit@2711'")
+except:
+    print("ERROR :(")
 
 cur = conn.cursor()
 
@@ -395,7 +395,7 @@ def club_details(play):
         print(y)
     # return query
 
-def analysis(tag):
+def overall_analysis(tag):
     cur.execute("SELECT * from WIN_TEAM('{}')".format(tag))
     x = cur.fetchall()
     wins = 0 if x[0][0] is None else x[0][0]
@@ -410,73 +410,124 @@ def analysis(tag):
     var1 = 0 if x[0][0] is None else x[0][0]
     var2 = 0 if x[0][1] is None else x[0][1]
     var3 = 1 if x[0][2] is None else x[0][2]
-    
     cur.execute("select * from WIN_SHOWR('{}',{})".format(tag,2))
     x = cur.fetchall()
-    print(x)
     var1s = 0 if x[0][0] is None else x[0][0]
     var2s = 0 if x[0][1] is None else x[0][1]
     var3s = 1 if x[0][2] is None else x[0][2]
-   
-    print("OVERALL WIN RATE : {}".format(((wins+sr1+sr2)*100)/(games_palyed+sgp)))
-    print("TEAM WIN RATE : {}".format((wins*100)/games_palyed))
-    print("SHOWDOWN WIN RATE : Rank 1 : {}  | Rank 2 : {}".format((sr1*100)/sgp,(sr2*100)/sgp))
-    print("SOLO SHOWDOWN WIN RATE : Rank 1 : {}  | Rank 2 : {}".format((var1*100)/var3,(var2*100)/var3))
-    print("DUO SHOWDOWN WIN RATE : Rank 1 : {}  | Rank 2 : {}".format((var1s*100)/var3s,(var2s*100)/var3s))
 
-def ind_event_page(tag):
-    print("TEAM MAPS")
+    overall_winrate = "{0:.2f}".format(((wins+sr1+sr2)*100)/(games_palyed+sgp))
+    team_winrate = "{0:.2f}".format((wins*100)/games_palyed)
+    showdown_winrate_r1 = "{0:.2f}".format((sr1*100)/sgp)
+    showdown_winrate_r2 = "{0:.2f}".format((sr2*100)/sgp)
+    showdown_winrate_ind1_r1 = "{0:.2f}".format((var1*100)/var3)
+    showdown_winrate_ind1_r2 = "{0:.2f}".format((var2*100)/var3)
+    showdown_winrate_ind2_r1 = "{0:.2f}".format((var1s*100)/var3s)
+    showdown_winrate_ind2_r2 = "{0:.2f}".format((var2s*100)/var3s)
+
+    print("OVERALL WIN RATE : {}".format(overall_winrate))
+    print("TEAM WIN RATE : {}".format(team_winrate))
+    print("SHOWDOWN WIN RATE : Rank 1 : {}  | Rank 2 : {}".format(showdown_winrate_r1,showdown_winrate_r2))
+    print("SOLO SHOWDOWN WIN RATE : Rank 1 : {}  | Rank 2 : {}".format(showdown_winrate_ind1_r1,showdown_winrate_ind1_r2))
+    print("DUO SHOWDOWN WIN RATE : Rank 1 : {}  | Rank 2 : {}".format(showdown_winrate_ind2_r1,showdown_winrate_ind2_r2))
+
+    # overall_winrate = "{.2f}".format(((wins+sr1+sr2)*100)/(games_palyed+sgp))
+
+def team_map_analysis(tag):
     cur.execute("SELECT * FROM IND_MAP('{}')".format(tag))
     team_event = cur.fetchall()
     modes = []
     for i in team_event:
         modes.append(i[0])
     modes = set(modes)
-    print(modes)
-    print("\n\nShowdown Map")
+    modes = list(modes)
+    return modes,team_event
+
+def get_team_map_analysis(data,mode):
+    map_per = []
+    for i in data:
+        temp = []
+        if i[0]==mode:
+            temp.append(i[1])
+            temp.append(round((i[2]*100)/i[3],2))
+        map_per.append(temp)
+    return map_per
+
+
+def showdowna_map_analysis(tag):
     cur.execute("SELECT * FROM IND_MAP_SHOW('{}')".format(tag))
     show = cur.fetchall()
-    smaps = []
+    smaps_anal = []
     for i in show:
-        smaps.append(i[0])
-    smaps = set(smaps)
-    print(smaps)
+        temp = []
+        temp.append(i[0])
+        temp.append(round((i[1]*100)/i[3],2))
+        temp.append(round((i[2]*100)/i[3],2))
+        smaps_anal.append(temp)
+    return smaps_anal
 
-    print("\n\nShowdown Map Ind")
-    cur.execute("SELECT * FROM IND_MAP_SHOWE('{}',{});".format(tag,1))
+def showdowni_map_analysis(tag,st):
+    cur.execute("SELECT * FROM IND_MAP_SHOWE('{}',{});".format(tag,st))
     show_r = cur.fetchall()
-    smaps1 = []
+    smaps_ind_anal = []
     for i in show_r:
-        smaps1.append(i[0])
-    smaps1 = set(smaps1)
-    print(smaps1)
+        temp = []
+        temp.append(i[0])
+        temp.append(round((i[1]*100)/i[3],2))
+        temp.append(round((i[2]*100)/i[3],2))
+        smaps_ind_anal.append(temp)
+    return smaps_ind_anal
 
-    print("\n\nShowdown Map Ind 2")
-    cur.execute("SELECT * FROM IND_MAP_SHOWE('{}',{});".format(tag,2))
-    show_r = cur.fetchall()
-    smaps2 = []
-    for i in show_r:
-        smaps2.append(i[0])
-    smaps2 = set(smaps2)
-    print(smaps2)
+
+def ind_event_page(tag):
+    # print("TEAM MAPS")
+    # cur.execute("SELECT * FROM IND_MAP('{}')".format(tag))
+    # team_event = cur.fetchall()
+    # modes = []
+    # for i in team_event:
+    #     modes.append(i[0])
+    # modes = set(modes)
+    # print(modes)
+    # print("\n\nShowdown Map")
+    # cur.execute("SELECT * FROM IND_MAP_SHOW('{}')".format(tag))
+    # show = cur.fetchall()
+    # smaps = []
+    # for i in show:
+    #     smaps.append(i[0])
+    # smaps = set(smaps)
+    # print(smaps)
+
+    # print("\n\nShowdown Map Ind")
+    # cur.execute("SELECT * FROM IND_MAP_SHOWE('{}',{});".format(tag,1))
+    # show_r = cur.fetchall()
+    # smaps1 = []
+    # for i in show_r:
+    #     smaps1.append(i[0])
+    # smaps1 = set(smaps1)
+    # print(smaps1)
+
+    # print("\n\nShowdown Map Ind 2")
+    # cur.execute("SELECT * FROM IND_MAP_SHOWE('{}',{});".format(tag,2))
+    # show_r = cur.fetchall()
+    # smaps2 = []
+    # for i in show_r:
+    #     smaps2.append(i[0])
+    # smaps2 = set(smaps2)
+    # print(smaps2)
+    pass
 
 def exist(s,el):
     for i in s:
         if i[0]==el and i[1]:
             return True
     return False
-    
-def ind_brawler(tag):
-    print("-------------------------------------------------------------------")
+
+def brawler_analysis(tag):
     cur.execute("SELECT * FROM brawler_performance('{}')".format(tag))
     brawler_performance = cur.fetchall()
-    bp = []
-    for i in brawler_performance:
-        bp.append(i[0])
-    bp = set(bp)
-    print(bp)
-    
-    print("\n\n")
+    return brawler_performance
+
+def brawler_map_team_analysis(tag):
     cur.execute("SELECT * FROM team_brawler_performance('{}')".format(tag))
     team_performance = cur.fetchall()
     tp = []
@@ -497,40 +548,133 @@ def ind_brawler(tag):
             temp = set(temp)
             mb.append(temp)
     m = set(m)
-    print(m)
-    print(mb)
+    m = list(m)
+    mb = list(mb)
+    return m,mb,team_performance
 
+def get_brawler_map_team_analysis(data,mode,brawler):
+    anal_table = []
+    for i in data:
+        temp = []
+        if i[0]==mode and i[2]==brawler:
+            temp.append(i[1])
+            temp.append(i[3])
+            temp.append(i[4])
+        anal_table.append(temp)
+    return anal_table
 
-    print("\n\n")
+def brawler_map_showdown_analysis(tag):
     cur.execute("SELECT * FROM showdown_brawler_performance('{}')".format(tag))
     showdown_performance = cur.fetchall()
     sp = []
     for i in showdown_performance:
         sp.append(i[1])
     sp = set(sp)
-    print(sp)
-    print("\n\n")
-    cur.execute("SELECT * FROM showdown_ind_brawler_performance('{}',{})".format(tag,1))
+    sp = list(sp)
+    return sp,showdown_performance
+
+def get_brawler_map_showdown_analysis(data,bname):
+    show_tab = []
+    for i in data:
+        temp = []
+        if i[1] == bname:
+            temp.append(i[0])
+            temp.append(i[2])
+            temp.append(i[3])
+            temp.append(i[4])
+            temp.append(i[5])
+        show_tab.append(temp)
+    return show_tab
+
+def brawler_map_ind_showdown_analysis(tag,st):
+    cur.execute("SELECT * FROM showdown_ind_brawler_performance('{}',{})".format(tag,st))
     showdown_performance_ind = cur.fetchall()
     sp1 = []
     for i in showdown_performance_ind:
         sp1.append(i[1])
     sp1 = set(sp1)
-    print(sp1)
+    sp1 = list(sp1)
+    return sp1,showdown_performance_ind
+
+def get_brawler_map_ind_showdown_analysis(data,bname):
+    show_tab = []
+    for i in data:
+        temp = []
+        if i[1] == bname:
+            temp.append(i[0])
+            temp.append(i[2])
+            temp.append(i[3])
+            temp.append(i[4])
+            temp.append(i[5])
+        show_tab.append(temp)
+    return show_tab
+
+def ind_brawler(tag):
+    # print("-------------------------------------------------------------------")
+    # cur.execute("SELECT * FROM brawler_performance('{}')".format(tag))
+    # brawler_performance = cur.fetchall()
+    # bp = []
+    # for i in brawler_performance:
+    #     bp.append(i[0])
+    # bp = set(bp)
+    # print(bp)
+    
+    # print("\n\n")
+    # cur.execute("SELECT * FROM team_brawler_performance('{}')".format(tag))
+    # team_performance = cur.fetchall()
+    # tp = []
+    # for i in team_performance:
+    #     tp.append((i[0],i[2]))
+    # tp = set(tp)
+    # m = []
+    # mb = []
+    # check = []
+    # for i in tp:
+    #     if not exist(check,i[0]):
+    #         m.append(i[0])
+    #         check.append((i[0],True))
+    #         temp = []
+    #         for j in tp:
+    #             if i[0]==j[0]:
+    #                 temp.append(j[1])
+    #         temp = set(temp)
+    #         mb.append(temp)
+    # m = set(m)
+    # print(m)
+    # print(mb)
 
 
-    print("\n\n")
-    cur.execute("SELECT * FROM showdown_ind_brawler_performance('{}',{})".format(tag,2))
-    showdown_performance_ind = cur.fetchall()
-    sp2 = []
-    for i in showdown_performance_ind:
-        sp2.append(i[1])
-    sp2 = set(sp2)
-    print(sp2)
+    # print("\n\n")
+    # cur.execute("SELECT * FROM showdown_brawler_performance('{}')".format(tag))
+    # showdown_performance = cur.fetchall()
+    # sp = []
+    # for i in showdown_performance:
+    #     sp.append(i[1])
+    # sp = set(sp)
+    # print(sp)
+    # print("\n\n")
+    # cur.execute("SELECT * FROM showdown_ind_brawler_performance('{}',{})".format(tag,1))
+    # showdown_performance_ind = cur.fetchall()
+    # sp1 = []
+    # for i in showdown_performance_ind:
+    #     sp1.append(i[1])
+    # sp1 = set(sp1)
+    # print(sp1)
+
+
+    # print("\n\n")
+    # cur.execute("SELECT * FROM showdown_ind_brawler_performance('{}',{})".format(tag,2))
+    # showdown_performance_ind = cur.fetchall()
+    # sp2 = []
+    # for i in showdown_performance_ind:
+    #     sp2.append(i[1])
+    # sp2 = set(sp2)
+    # print(sp2)
+    pass
     
 
 
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImNlMjFkOThlLWQ2NzEtNDJmMC05MzNiLThjMDdjYmUyZDEyZSIsImlhdCI6MTU4NzAxMjQ2Mywic3ViIjoiZGV2ZWxvcGVyL2IwZDZiNDk4LTFlYWMtMTM1Ni1hMTllLTYwZTlmMzQ0YmY3NCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTU3LjMyLjIzMC42NCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.L7iW757FNrUH5dUILZr8vyTCYSNTE6smATC7QY0wpTnmmenAzMmpa3-AO7r6B0Vq3PuVbJOUqoATX5wFJRbgdA'
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImQ0YTA2NTE0LTQ4YjUtNGNkNy04NjNlLWU2ZjRiZmQ5NWM4NCIsImlhdCI6MTU4NzA2MTAwNCwic3ViIjoiZGV2ZWxvcGVyL2IwZDZiNDk4LTFlYWMtMTM1Ni1hMTllLTYwZTlmMzQ0YmY3NCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTU3LjMyLjExMy4xNjkiXSwidHlwZSI6ImNsaWVudCJ9XX0.BGGQiftXQMZh-1FJuSz-dakm9wYR_3t5shNT8IakXXTpseEMYqSQc6PvxjzjmIE1MF2azbgvIolZC25sKElXUw'
 
 # tagg = sys.argv[1]
 # print(type(tagg))
@@ -551,22 +695,22 @@ token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi0
 
 # Tag = 'Q80JYUJU'
 # try:
-# client = brawlstats.OfficialAPI(token)
-# tag = '2LJYR2UU'
-# player = client.get_player(tag)
-# parse_profile(player)
-# club_details(player)
-# battles = client.get_battle_logs(tag)
-# Tag = "#{}".format(tag)
-# count = insert_battle_det(battles,tag)
-# print(count)
-# for i in range(count):
-#     print("BATTLE NUMBER : "+str(i+1))
-#     # print(battles[i])
-#     battle_log(battles[i],Tag)
-# analysis(Tag)
-# ind_event_page(Tag)
-# ind_brawler(Tag)
+client = brawlstats.OfficialAPI(token)
+tag = '2LJYR2UU'
+player = client.get_player(tag)
+parse_profile(player)
+club_details(player)
+battles = client.get_battle_logs(tag)
+Tag = "#{}".format(tag)
+count = insert_battle_det(battles,tag)
+print(count)
+for i in range(count):
+    print("BATTLE NUMBER : "+str(i+1))
+    # print(battles[i])
+    battle_log(battles[i],Tag)
+overall_analysis(Tag)
+ind_event_page(Tag)
+ind_brawler(Tag)
 # except:
 #     print("Doffa khotu kem nakhe che")
 

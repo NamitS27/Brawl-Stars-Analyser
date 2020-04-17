@@ -15,11 +15,7 @@ DECLARE
         FROM
             battle_det
         WHERE
--- <<<<<<< HEAD
-            tag = NEW.tag 
--- =======
-            -- tag = NEW.player_tag 
--- >>>>>>> 7e32776cbe3ccd30f4f03462bfdecc66ecf026be
+            tag = NEW.tag
         AND
             battle_time = NEW.battle_time;
     temp RECORD;
@@ -101,11 +97,7 @@ DECLARE
         FROM
             battle_det
         WHERE
--- <<<<<<< HEAD
-            tag = NEW.tag 
--- =======
-            -- tag = NEW.player_tag 
--- >>>>>>> 7e32776cbe3ccd30f4f03462bfdecc66ecf026be
+            tag = NEW.tag        
         AND
             battle_time = NEW.battle_time;
     temp RECORD;
@@ -153,11 +145,7 @@ DECLARE
         FROM
             battle_det
         WHERE
--- <<<<<<< HEAD
             tag = NEW.tag 
--- =======
-            -- tag = NEW.player_tag 
--- >>>>>>> 7e32776cbe3ccd30f4f03462bfdecc66ecf026be
         AND
             battle_time = NEW.battle_time;
     temp RECORD;

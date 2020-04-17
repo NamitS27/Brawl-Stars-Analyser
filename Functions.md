@@ -50,7 +50,7 @@ BEGIN
 	FULL OUTER JOIN
 		(SELECT event_map,brawler_name,sum(rank_1) r1,sum(rank_2) r2,sum(games_played) gp FROM showdown_analysis WHERE tag = ptag GROUP BY event_map,brawler_name) B
 	ON
-		A.brawler_name = B.brawler_name;
+		A.event_map = B.event_map and A.brawler_name = B.brawler_name;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -68,7 +68,7 @@ BEGIN
 	FULL OUTER JOIN
 		(SELECT event_map,brawler_name,sum(rank_1) r1,sum(rank_2) r2,sum(games_played) gp FROM showdown_analysis WHERE tag = ptag and showdown_type=st GROUP BY event_map,brawler_name) B
 	ON
-		A.brawler_name = B.brawler_name;
+		A.event_map = B.event_map and A.brawler_name = B.brawler_name;
 END;
 $$ LANGUAGE plpgsql;
 	
