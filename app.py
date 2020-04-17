@@ -264,6 +264,7 @@ client = brawlstats.OfficialAPI(token)
 #         lisl.append(pint_teams(tag,str(convert(detls[7])),time_extract(detls[0]),'DRAW',2,deft,star_ply_tg))
 #     return li,lisl    
 
+
 def club_detai(play):
     l = []
     club = play.get_club()
@@ -276,22 +277,71 @@ def club_detai(play):
     l.append("CLUB DESC : "+club.description)
     mem = club.get_members()
     ll =[]
+    tag=[]
+    name=[]
+    name_colour=[]
+    role=[]
+    trophies=[]
     for pla in mem:
         ll.append(get_club_plyer_det(pla))
-    return l,ll
-
+        tag.append(get_tag(pla))
+        name.append(get_name((pla)))
+        name_colour.append(get_name_colour(pla))
+        role.append(get_role(pla))
+        trophies.append(get_trophies(pla))
+    return l, ll, tag, name, name_colour, role, trophies
 
 
 def get_club_plyer_det(player_det):
+    tag = []
+    name =[]
+    name_colour = []
+    role = []
+    trophies = []
     l = []
     l.append("---------------------------------------------------------------------")
     l.append("Tag : "+player_det.tag)
+    tag.append(player_det.tag)
     l.append("Name : "+player_det.name)
+    name.append(player_det.name)
     l.append("Name Color : "+player_det.name_color)
+    name_colour.append(player_det.name_color)
     l.append("Role : "+player_det.role)
+    role.append(player_det.role)
     l.append("Trophies : "+str(player_det.trophies))
+    trophies.append(player_det.trophies)
     l.append("---------------------------------------------------------------------")
     return l
+
+
+def get_tag(player_det):
+    tag = []
+    tag.append(player_det.tag)
+    return tag
+
+
+def get_name(player_det):
+    name = []
+    name.append(player_det.name)
+    return name
+
+
+def get_name_colour(player_det):
+    name_colour = []
+    name_colour.append(player_det.name_color)
+    return name_colour
+
+
+def get_role(player_det):
+    role = []
+    role.append(player_det.role)
+    return role
+
+
+def get_trophies(player_det):
+    trophies = []
+    trophies.append(player_det.trophies)
+    return trophies
 
 
 def get_prof(prof_list):
@@ -661,8 +711,9 @@ def club_det():
     # global user
     print(user)
     plyer = client.get_player(user)
-    l,ll = club_detai(plyer)
-    return render_template('club_details.html',det = l,dd=ll)
+    l,ll,tag, name, name_colour, role, trophies = club_detai(plyer)
+    number_of_players = len(ll)
+    return render_template('club_details.html', det=l, dd=ll, player_number=number_of_players, tag=tag, name=name, name_colour=name_colour, role=role, trophies=trophies)
 
 
 @app.route('/')
