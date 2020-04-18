@@ -5,7 +5,8 @@
 {% for i in dd %}
   <div class="brawl-card">
     <div class="brawl-card__image brawl-card__image">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian.png" alt="barbarian" />
+      <!-- <img src="{{url_for('static',filename='fullbrawl/{{i[1]}}.png')}}" alt="barian" /> -->
+      <img src="static/fullbrawl/{{i[1]}}.png" alt="barbarian" />
     </div>
     <div class="brawl-card__level brawl-card__level--barbarian">Rank {{i[3]}}</div>
     <div class="brawl-card__unit-name">{{i[1]}}</div>
@@ -17,12 +18,12 @@
     <div class="brawl-card__unit-stay brawl-card__unit-stats--barbarian clearfix">
       
       <div class="one-half">
-        <div class="stat">{{i[6][1]}}</div>
+        <div class="stat">{{i[6]}}</div>
         <div class="stat-value">StarPower1</div>
       </div>
 
       <div class="one-half">
-        <div class="stat">{{i[6][3]}}</div>
+        <div class="stat">{{i[7]}}</div>
         <div class="stat-value">StarPower2</div>
       </div>
     </div>

@@ -79,29 +79,6 @@ def battle_log(battle_l,tag):
         else:
             dshow_down_parse(j,tag,time_extract(log_b[0]),details)
      elif details[4][2]=='bigGame' or details[4][2]=='roboRumble' or details[4][2]=='bossFight' or details[4][2]=='takedown' or details[4][2]=='loneStar':
-        # log_b.append(details[5][2]) #Battle Duration
-        # print("----------------------------------------------------------------------------------------")
-        # print("DATE : "+time_extract(log_b[0]))
-        # print("----------------------------------------------------------------------------------------")
-        # print("Event ID : "+str(log_b[1])+"     | Event Mode : "+log_b[2]+"     | Event Map : "+log_b[3])
-        # print("Battle Mode : "+log_b[4]+"   | Battle Duration : "+str(convert(log_b[5])))
-        # print("----------------------------------------------------------------------------------------")
-        # bs = []
-        # for x in range(len(details[6][2])): 
-        #    temp = []
-        #    temp.append(details[6][2][x].tag)
-        #    temp.append(details[6][2][x].name)
-        #    temp.append(str(details[6][2][x].brawler.id))
-        #    temp.append(details[6][2][x].brawler.name)
-        #    temp.append(str(details[6][2][x].brawler.power))
-        #    temp.append(str(details[6][2][x].brawler.trophies))
-        #    bs.append(temp)
-        # bbtag = details[7][2]
-        # bbn = details[8][2]
-        # bbbi = str(details[9][3])
-        # bbbn = details[10][3]
-        # bbbp = str(details[11][3])
-        # bbbt = str(details[12][2])
         print('NO')
      else:
         log_b.append(details[5][2]) # BATTLE TYPE
@@ -155,10 +132,7 @@ def show_down_parse(j,tag,time,det):
         print("Brawler Power : "+str(det[8-j][2][i].brawler.power))
         print("Brawler Trophies : "+str(det[8-j][2][i].brawler.trophies))
         print("----------------------------------------------------------------------------------------")
-        # query2 = ins+det[8-j][2][i].tag+btd+"'"+temp_det[0]+"',"+str(get_br_trophies(det[8-j][2][i].tag[1:],det[8-j][2][i].brawler.name)-det[8-j][2][i].brawler.trophies)+bm
         query = "INSERT INTO battle_solo VALUES('"+tag+"','"+time+"',"+str(i+1)+",'"+det[8-j][2][i].tag+"','"+det[8-j][2][i].name.replace("'","''")+"',"+str(det[8-j][2][i].brawler.id)+",'"+det[8-j][2][i].brawler.name+"',"+str(det[8-j][2][i].brawler.power)+","+str(det[8-j][2][i].brawler.trophies)+")"
-        # cur.execute(query2)
-        # conn.commit()
         cur.execute(query)
         conn.commit()
 
@@ -249,22 +223,22 @@ def convert(seconds):
     return "%d:%02d:%02d" % (hour, minutes, seconds)
 
 def parse_profile(prof_list):
-    print("---------------------------------------------------------------------")
-    print("PLAYER PROFILE ")
-    print("---------------------------------------------------------------------")
-    print("Tag : "+prof_list.tag)
-    print("Name : "+prof_list.name)
-    print("Name Color : "+str(prof_list.name_color))
-    print("Trophies : "+str(prof_list.trophies))
-    print("Highest Trophies : "+str(prof_list.highest_trophies))
-    print("Experience Level : "+str(prof_list.exp_level))
-    print("Expereince Points : "+str(prof_list.exp_points))
-    print("CC Q : "+str(prof_list.is_qualified_from_championship_challenge))
-    print("3vs3 Victories : "+str(prof_list.x3vs3_victories))
-    print("Solo Victories : "+str(prof_list.solo_victories))
-    print("Duo Victories : "+str(prof_list.duo_victories))
-    print("Best Robo Rumble Time : "+str(convert(prof_list.best_robo_rumble_time)))
-    print("Best Time as Big Brawler : "+str(convert(prof_list.best_time_as_big_brawler)))
+    # print("---------------------------------------------------------------------")
+    # print("PLAYER PROFILE ")
+    # print("---------------------------------------------------------------------")
+    # print("Tag : "+prof_list.tag)
+    # print("Name : "+prof_list.name)
+    # print("Name Color : "+str(prof_list.name_color))
+    # print("Trophies : "+str(prof_list.trophies))
+    # print("Highest Trophies : "+str(prof_list.highest_trophies))
+    # print("Experience Level : "+str(prof_list.exp_level))
+    # print("Expereince Points : "+str(prof_list.exp_points))
+    # print("CC Q : "+str(prof_list.is_qualified_from_championship_challenge))
+    # print("3vs3 Victories : "+str(prof_list.x3vs3_victories))
+    # print("Solo Victories : "+str(prof_list.solo_victories))
+    # print("Duo Victories : "+str(prof_list.duo_victories))
+    # print("Best Robo Rumble Time : "+str(convert(prof_list.best_robo_rumble_time)))
+    # print("Best Time as Big Brawler : "+str(convert(prof_list.best_time_as_big_brawler)))
     query_check = "SELECT * FROM PROFILE WHERE tag = '"+prof_list.tag+"';"
     cur.execute(query_check)
     x = cur.fetchall()
@@ -278,7 +252,6 @@ def parse_profile(prof_list):
     # cur.execute(query_check)
     # x = cur.fetchall() # Reutrns the player details , Data type : Tuple
     parse_ind_brawlers(prof_list.brawlers,prof_list.tag) # Function to get list of bralwers
-    # return query
 
 def parse_ind_brawlers(lets_brawl,tag):
     flag = True
@@ -287,15 +260,15 @@ def parse_ind_brawlers(lets_brawl,tag):
     x = cur.fetchall()
     if(len(x)>0) :
         flag = False
-    print("---------------------------------------------------------------------")
-    print("BRAWLER LIST : "+str(len(lets_brawl))+" BRAWLERS")
-    print("---------------------------------------------------------------------")
+    # print("---------------------------------------------------------------------")
+    # print("BRAWLER LIST : "+str(len(lets_brawl))+" BRAWLERS")
+    # print("---------------------------------------------------------------------")
     for i in lets_brawl:
         get_brawler_details(list(parse(i)),tag,flag)
-    cur.execute(query_check)
-    x = cur.fetchall()
-    for i in x:
-        print(i)
+    # cur.execute(query_check)
+    # x = cur.fetchall()
+    # for i in x:
+    #     print(i)
 
 
 def get_brawler_details(brawl_list,tag,flag):
@@ -303,13 +276,13 @@ def get_brawler_details(brawl_list,tag,flag):
     # print(brawl_list)
     for i in brawl_list:
         list_tp.append(i[1])
-    print("---------------------------------------------------------------------")
-    print("ID : "+str(list_tp[0]))
-    print("Brawler Name : "+list_tp[1])
-    print("Power : "+str(list_tp[2]))
-    print("Rank : "+str(list_tp[3]))
-    print("Trophies : "+str(list_tp[4]))
-    print("Highest Trophies : "+str(list_tp[5]))
+    # print("---------------------------------------------------------------------")
+    # print("ID : "+str(list_tp[0]))
+    # print("Brawler Name : "+list_tp[1])
+    # print("Power : "+str(list_tp[2]))
+    # print("Rank : "+str(list_tp[3]))
+    # print("Trophies : "+str(list_tp[4]))
+    # print("Highest Trophies : "+str(list_tp[5]))
     x = list(list_tp[6])
     star_list = []
     temp_str = ""
@@ -323,9 +296,9 @@ def get_brawler_details(brawl_list,tag,flag):
         star_list.append(y.name)
         temp_str += "'"+y.name+"'"
         temp_ste += ",brawler_star_power_{}_name = '".format(cntr)+y.name+"'"
-    print("STAR POWER : "+str(star_list))
-    print("---------------------------------------------------------------------")
-    print(temp_ste)
+    # print("STAR POWER : "+str(star_list))
+    # print("---------------------------------------------------------------------")
+    # print(temp_ste)
     query = ""
     if not flag:
         query = "UPDATE BRAWLERS SET brawler_power = "+str(list_tp[2])+", brawler_rank = "+str(list_tp[3])+", brawler_trophies = "+str(list_tp[4])+", brawler_highest_trophies = "+str(list_tp[5])+temp_ste+"WHERE tag = '"+tag+"' and brawler_id = "+str(list_tp[0])
@@ -342,13 +315,13 @@ def get_club_ply_det(player_det,club_tag):
     x = cur.fetchall()
     if len(x) > 0: 
         query_flag = True
-    print("---------------------------------------------------------------------")
-    print("Tag : "+player_det.tag)
-    print("Name : "+player_det.name)
-    print("Name Color : "+player_det.name_color)
-    print("Role : "+player_det.role)
-    print("Trophies : "+str(player_det.trophies))
-    print("---------------------------------------------------------------------")
+    # print("---------------------------------------------------------------------")
+    # print("Tag : "+player_det.tag)
+    # print("Name : "+player_det.name)
+    # print("Name Color : "+player_det.name_color)
+    # print("Role : "+player_det.role)
+    # print("Trophies : "+str(player_det.trophies))
+    # print("---------------------------------------------------------------------")
     query = ""
     if query_flag:
         query = "UPDATE CLUB_MEMBERS SET club_tag = '"+club_tag+"',player_name = '"+player_det.name.replace("'","''")+"',player_nc = '"+player_det.name_color+"',player_role = '"+player_det.role+"',player_trophies = "+str(player_det.trophies)+" WHERE player_tag = '"+player_det.tag+"'"
@@ -367,12 +340,12 @@ def club_details(play):
         flagi = False
         print("Not in club")
     if flagi:
-        print("CLUB TAG : "+club.tag)
-        print("CLUB NAME : "+club.name)
-        print("CLUB TROPHIES : "+str(club.trophies))
-        print("CLUB TYPE : "+club.type)
-        print("CLUB RTRP : "+str(club.required_trophies))
-        print("CLUB DESC : "+club.description)
+        # print("CLUB TAG : "+club.tag)
+        # print("CLUB NAME : "+club.name)
+        # print("CLUB TROPHIES : "+str(club.trophies))
+        # print("CLUB TYPE : "+club.type)
+        # print("CLUB RTRP : "+str(club.required_trophies))
+        # print("CLUB DESC : "+club.description)
         query_check = "SELECT * FROM CLUB WHERE club_tag = '"+club.tag+"';"
         cur.execute(query_check)
         x = cur.fetchall()
@@ -387,13 +360,12 @@ def club_details(play):
         club_mem = club.get_members()
         for i in club_mem:
             get_club_ply_det(i,club.tag)
-        cur.execute(query_check)
-        x = cur.fetchall()
-        print(x)
-        cur.execute("SELECT * FROM CLUB_MEMBERS WHERE club_tag = '"+club.tag+"'")
-        y = cur.fetchall()
-        print(y)
-    # return query
+        # cur.execute(query_check)
+        # x = cur.fetchall()
+        # print(x)
+        # cur.execute("SELECT * FROM CLUB_MEMBERS WHERE club_tag = '"+club.tag+"'")
+        # y = cur.fetchall()
+        # print(y)
 
 def overall_analysis(tag):
     cur.execute("SELECT * from WIN_TEAM('{}')".format(tag))
@@ -425,13 +397,22 @@ def overall_analysis(tag):
     showdown_winrate_ind2_r1 = "{0:.2f}".format((var1s*100)/var3s)
     showdown_winrate_ind2_r2 = "{0:.2f}".format((var2s*100)/var3s)
 
+    analysis = []
+    analysis.append(overall_winrate)
+    analysis.append(team_winrate)
+    analysis.append(showdown_winrate_r1)
+    analysis.append(showdown_winrate_r2)
+    analysis.append(showdown_winrate_ind1_r1)
+    analysis.append(showdown_winrate_ind1_r2)
+    analysis.append(showdown_winrate_ind2_r1)
+    analysis.append(showdown_winrate_ind2_r2)
+
     print("OVERALL WIN RATE : {}".format(overall_winrate))
     print("TEAM WIN RATE : {}".format(team_winrate))
     print("SHOWDOWN WIN RATE : Rank 1 : {}  | Rank 2 : {}".format(showdown_winrate_r1,showdown_winrate_r2))
     print("SOLO SHOWDOWN WIN RATE : Rank 1 : {}  | Rank 2 : {}".format(showdown_winrate_ind1_r1,showdown_winrate_ind1_r2))
     print("DUO SHOWDOWN WIN RATE : Rank 1 : {}  | Rank 2 : {}".format(showdown_winrate_ind2_r1,showdown_winrate_ind2_r2))
-
-    # overall_winrate = "{.2f}".format(((wins+sr1+sr2)*100)/(games_palyed+sgp))
+    return analysis
 
 def team_map_analysis(tag):
     cur.execute("SELECT * FROM IND_MAP('{}')".format(tag))
@@ -478,43 +459,6 @@ def showdowni_map_analysis(tag,st):
         smaps_ind_anal.append(temp)
     return smaps_ind_anal
 
-
-def ind_event_page(tag):
-    # print("TEAM MAPS")
-    # cur.execute("SELECT * FROM IND_MAP('{}')".format(tag))
-    # team_event = cur.fetchall()
-    # modes = []
-    # for i in team_event:
-    #     modes.append(i[0])
-    # modes = set(modes)
-    # print(modes)
-    # print("\n\nShowdown Map")
-    # cur.execute("SELECT * FROM IND_MAP_SHOW('{}')".format(tag))
-    # show = cur.fetchall()
-    # smaps = []
-    # for i in show:
-    #     smaps.append(i[0])
-    # smaps = set(smaps)
-    # print(smaps)
-
-    # print("\n\nShowdown Map Ind")
-    # cur.execute("SELECT * FROM IND_MAP_SHOWE('{}',{});".format(tag,1))
-    # show_r = cur.fetchall()
-    # smaps1 = []
-    # for i in show_r:
-    #     smaps1.append(i[0])
-    # smaps1 = set(smaps1)
-    # print(smaps1)
-
-    # print("\n\nShowdown Map Ind 2")
-    # cur.execute("SELECT * FROM IND_MAP_SHOWE('{}',{});".format(tag,2))
-    # show_r = cur.fetchall()
-    # smaps2 = []
-    # for i in show_r:
-    #     smaps2.append(i[0])
-    # smaps2 = set(smaps2)
-    # print(smaps2)
-    pass
 
 def exist(s,el):
     for i in s:
@@ -608,149 +552,18 @@ def get_brawler_map_ind_showdown_analysis(data,bname):
             temp.append(i[5])
         show_tab.append(temp)
     return show_tab
-
-def ind_brawler(tag):
-    # print("-------------------------------------------------------------------")
-    # cur.execute("SELECT * FROM brawler_performance('{}')".format(tag))
-    # brawler_performance = cur.fetchall()
-    # bp = []
-    # for i in brawler_performance:
-    #     bp.append(i[0])
-    # bp = set(bp)
-    # print(bp)
-    
-    # print("\n\n")
-    # cur.execute("SELECT * FROM team_brawler_performance('{}')".format(tag))
-    # team_performance = cur.fetchall()
-    # tp = []
-    # for i in team_performance:
-    #     tp.append((i[0],i[2]))
-    # tp = set(tp)
-    # m = []
-    # mb = []
-    # check = []
-    # for i in tp:
-    #     if not exist(check,i[0]):
-    #         m.append(i[0])
-    #         check.append((i[0],True))
-    #         temp = []
-    #         for j in tp:
-    #             if i[0]==j[0]:
-    #                 temp.append(j[1])
-    #         temp = set(temp)
-    #         mb.append(temp)
-    # m = set(m)
-    # print(m)
-    # print(mb)
-
-
-    # print("\n\n")
-    # cur.execute("SELECT * FROM showdown_brawler_performance('{}')".format(tag))
-    # showdown_performance = cur.fetchall()
-    # sp = []
-    # for i in showdown_performance:
-    #     sp.append(i[1])
-    # sp = set(sp)
-    # print(sp)
-    # print("\n\n")
-    # cur.execute("SELECT * FROM showdown_ind_brawler_performance('{}',{})".format(tag,1))
-    # showdown_performance_ind = cur.fetchall()
-    # sp1 = []
-    # for i in showdown_performance_ind:
-    #     sp1.append(i[1])
-    # sp1 = set(sp1)
-    # print(sp1)
-
-
-    # print("\n\n")
-    # cur.execute("SELECT * FROM showdown_ind_brawler_performance('{}',{})".format(tag,2))
-    # showdown_performance_ind = cur.fetchall()
-    # sp2 = []
-    # for i in showdown_performance_ind:
-    #     sp2.append(i[1])
-    # sp2 = set(sp2)
-    # print(sp2)
-    pass
     
 
-
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImQ0YTA2NTE0LTQ4YjUtNGNkNy04NjNlLWU2ZjRiZmQ5NWM4NCIsImlhdCI6MTU4NzA2MTAwNCwic3ViIjoiZGV2ZWxvcGVyL2IwZDZiNDk4LTFlYWMtMTM1Ni1hMTllLTYwZTlmMzQ0YmY3NCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTU3LjMyLjExMy4xNjkiXSwidHlwZSI6ImNsaWVudCJ9XX0.BGGQiftXQMZh-1FJuSz-dakm9wYR_3t5shNT8IakXXTpseEMYqSQc6PvxjzjmIE1MF2azbgvIolZC25sKElXUw'
-
-# tagg = sys.argv[1]
-# print(type(tagg))
-
-
-
-#     print('')
-#     print('')
-
-# insert_battle_det('#P0VYR22V')
-# battles = client.get_battle_logs(tag)
-# for i in range(25):
-    # print("BATTLE NUMBER : "+str(i+1))
-    # battles[i].battle_time = '0200406T111944'
-    # pprint(battles[i])
-# 
-# print('\n\n\n')
-
-# Tag = 'Q80JYUJU'
-# try:
-client = brawlstats.OfficialAPI(token)
-tag = '2LJYR2UU'
-player = client.get_player(tag)
-parse_profile(player)
-club_details(player)
-battles = client.get_battle_logs(tag)
-Tag = "#{}".format(tag)
-count = insert_battle_det(battles,tag)
-print(count)
-for i in range(count):
-    print("BATTLE NUMBER : "+str(i+1))
-    # print(battles[i])
-    battle_log(battles[i],Tag)
-overall_analysis(Tag)
-ind_event_page(Tag)
-ind_brawler(Tag)
-# except:
-#     print("Doffa khotu kem nakhe che")
-
-# get_br_trophies(Tag,'NAMIT')
-
-# club_details(player)
-# # cur.execute(parse_profile(player))
-# conn.commit()
-# print(player.raw_data)
-# cont = client.get_constants()
-# print(cont[0])
-
-# print('\n\n\n')
-
-# try:
-#     print(club.tag))
-# except:
-#     print("NO")
-# print("CLUB TAG : "+club.tag)
-# print("CLUB NAME : "+club.name)
-# print("CLUB TROPHIES : "+str(club.trophies))
-# print("CLUB TYPE : "+club.type)
-# print("CLUB RTRP : "+str(club.required_trophies))
-# print("CLUB DESC : "+club.description)
-# # # print(club.badge)
-# best_players = club.get_members() # members sorted by trophies
-# for player in best_players:
-#     get_club_ply_det(player)
-
-
-
-# {'battle_time': '20200404T132900.000Z', 'event': {'id': 15000039, 'mode': 'roboRumble', 'map': 'Keep Safe'}, 'battle': {'mode': 'roboRumble', 'duration': 357, 'players': [{'tag': '#2LJYR2UU', 'name': '〘 彡★ ZΞUS ★彡 〙', 'brawler': {'id': 16000007, 'name': 'JESSIE', 'power': 9, 'trophies': 571}}, {'tag': '#2JPY8PUC', 'name': 'Super3abdo', 'brawler': {'id': 16000001, 'name': 'COLT', 'power': 10, 'trophies': 567}}, {'tag': '#GJUJJ09L', 'name': 'ThuNder', 'brawler': {'id': 16000016, 'name': 'PAM', 'power': 10, 'trophies': 543}}]}}
-
-
-# 1. SORT BRAWLERS ON BASIS OF POWER,TROPHIES
-# 2. OVERALL WINING PERCENTAGE OF THE IND PLAYER REGARDLESS OF MAP,EVENT,BATTLE TYPE
-# 3. WINNING PERCENTAGE CONSIDERING TEAM,DUO AND SOLO WISE
-# 4. WINNING PERCENTAGE CONDIDERING MAPS FOR SPECIFIC EVENT FOR TEAM,DUO AND SOLO
-# 5. BRAWLER PERFORMANCE FOR PARTICULAR EVENT I.E. TEAM,SOLO,DUO
-# 6. PLAYER'S BRAWLER PERFORMANCE ON BASIS OF HIS BATTLE FOR TEAM,DUO,SOLO
-# 7. BRAWLERS PERFORMANCE ON BASIS OF PARTIUCULAR MAP OF IND. EVENT
-# 8. PLAYER'S BRAWLER PERFORMANCE ON BASIS OF PARTICULAR MAP OF IND. EVENT
-# 9. Brawlers Performance regardless of team,solo,duo
+def run(token,tag):
+    client = brawlstats.OfficialAPI(token)
+    player = client.get_player(tag)
+    parse_profile(player)
+    club_details(player)
+    battles = client.get_battle_logs(tag)
+    Tag = "#{}".format(tag)
+    count = insert_battle_det(battles,tag)
+    print(count)
+    for i in range(count):
+        print("BATTLE NUMBER : "+str(i+1))
+        battle_log(battles[i],Tag)
+    overall_analysis(Tag)

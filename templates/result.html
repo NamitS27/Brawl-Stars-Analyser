@@ -19,7 +19,9 @@
         <div class="nav-wrapper">
           <a href="#" class="brand-logo">Player Details</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/battles">Battle Log</a></li>
+            {% if fla2 > 0 %}
+              <li><a href="/battles">Battle Log</a></li>
+            {% endif %}  
             <li><a href="/brawler">Brawler Info</a></li>
             {% if flag>0 %}
               <li><a href="/club">Club Info</a></li>
@@ -76,8 +78,3 @@
 <!--     
 </body>
 </html> -->
-
-
-  
-  
-  <!-- follow me template -->

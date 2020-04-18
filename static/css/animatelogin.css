@@ -52,7 +52,7 @@
     font-size: 34px;
     font-weight: 700;
     letter-spacing: 2px;
-    color: #ED2553;
+    color: #7827C4;
     position: relative;
 }
 
@@ -63,7 +63,7 @@
     position: absolute;
     top: 0;
     left: -50px;
-    background: #ED2553;
+    background: #7827C4;
 }
 
 .input {
@@ -118,6 +118,10 @@
 .input {
     width: 100%;
     float: left;
+}
+.vali{
+    bottom: 20px;
+    position: relative;
 }
 
 .input label,
@@ -200,7 +204,7 @@
 }
 
 .input .spin {
-    background: #ED2553;
+    background: #7827C4;
     z-index: 4;
     width: 0;
 }
@@ -262,7 +266,7 @@
 
 .button button {
     background-color: #fff;
-    color: #ED2553;
+    color: #7827C4;
     border: none;
 }
 
@@ -283,6 +287,8 @@
     transform: scale(1) rotate(0deg);
     -webkit-transform: scale(1) rotate(0deg);
     -ms-transform: scale(1) rotate(0deg);
+    left: 0px;
+    top: 0px;
 }
 
 .button.login button i.fa {
@@ -298,8 +304,8 @@
 }
 
 .button.login button:hover {
-    color: #ED2553;
-    border-color: #ED2553;
+    color: #7827C4;
+    border-color: #7827C4;
 }
 
 .button button {
@@ -320,7 +326,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: #ED2553;
+    background: #7827C4;
     border-radius: 50%;
 }
 
@@ -372,7 +378,7 @@
     width: 140px;
     height: 140px;
     border-radius: 40%;
-    background: #ED2553;
+    background: #7827C4;
     position: absolute;
     top: 40px;
     right: -70px;
@@ -428,7 +434,7 @@
 }
 
 body {
-    background-image: url(https://lh4.googleusercontent.com/-XplyTa1Za-I/VMSgIyAYkHI/AAAAAAAADxM/oL-rD6VP4ts/w1184-h666/Android-Lollipop-wallpapers-Google-Now-Wallpaper-2.png);
+    background-image: url("https://i.redd.it/ybl5ahmqj0341.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

@@ -46,7 +46,7 @@ h1{
     /* background: linear-gradient(to right, #25c481, #25b7c4); */
     background: -webkit-gradient(linear, left top, left bottom, from(#8c7a7a), color-stop(65%, #af877c), to(#af877c)) fixed;
     background: linear-gradient(to bottom, #8c7a7a 0%, #af877c 65%, #af877c 100%) fixed;
-    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/coc-background.jpg") no-repeat center center fixed;
+    background: url("https://i.redd.it/ybl5ahmqj0341.jpg") no-repeat center center fixed;
     background-size: cover;
     font-family: 'Roboto', sans-serif;
   }

@@ -15,7 +15,7 @@
         <div class="box">
 
             <div class="title">LOGIN</div>
-            <p>{{flag}}</p>
+            <!-- <p>{{flag}}</p> -->
             <div class="input">
                 <label for="name">Username</label>
                 <input type="text" name="name" id="name">
@@ -30,6 +30,13 @@
     
             <div class="button login">
                 <button><span>GO</span> <i class="fa fa-check"></i></button>
+            </div>
+            <div class="vali">
+                {% if flag==1 %}
+                   <label class = "validate" style="text-align: center; display: block; margin: auto; position: relative; width: 600px; top: 360px; right: 300px;color: red;">Invalid Login ID or Password</label>
+                {% elif flag==2 %}
+                   <label class = "validate" style="text-align: center; display: block; margin: auto; position: relative; width: 600px; top: 360px; right: 300px;">Invalid Credentials</label>
+                {% endif %}
             </div>
         </div>
     </form>
@@ -47,7 +54,7 @@
             </div>
     
             <div class="input">
-                <label for="regname">Username</label>
+                <label for="regname">Tag</label>
                 <input type="text" name="regname" id="regname">
                 <span class="spin"></span>
             </div>
