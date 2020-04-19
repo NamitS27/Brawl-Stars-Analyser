@@ -1,5 +1,38 @@
 <link rel="stylesheet" href="{{url_for('static',filename='css/clash.css')}}" />
 
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+
+<!-- jQuery library -->
+<!-- Latest compiled JavaScript -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+<!-- <div class="stats" style="max-width: 1200px;">
+  <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left: 20%;" >
+    <div class="ind_stats">
+        <div class="col-lg-4 col-sm-4 col-xs-4" style="padding: 5px 10px; left: 20%;" >
+          <label>Average Trophies  {{ind[0]}} </label>
+        </div>
+        <div class="col-lg-4 col-sm-4 col-xs-4" style="padding: 5px 10px; left: 20%;" >
+          <label>Average Power  {{ind[1]}} </label>
+        </div>
+        <div class="col-lg-4 col-sm-4 col-xs-4" style="padding: 5px 10px; left: 20%;" >
+          <label>Average Rank  {{ind[2]}} </label>
+        </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left: 20%;" >
+    <div class="sd_stats">
+      <div class="col-lg-4 col-sm-4 col-xs-4" style="padding: 5px 10px; left: 20%;" >
+        <label>Average Trophies  {{sd[0]}} </label>
+      </div>
+      <div class="col-lg-4 col-sm-4 col-xs-4" style="padding: 5px 10px; left: 20%;" >
+        <label>Average Power  {{sd[1]}} </label>
+      </div>
+      <div class="col-lg-4 col-sm-4 col-xs-4" style="padding: 5px 10px; left: 20%;" >
+        <label>Average Rank  {{sd[2]}} </label>
+      </div>
+  </div>
+  </div>
+</div><br><br> -->
 <div class="grid-container">
   <!-- <div class="wrapper"> -->
 {% for i in dd %}
@@ -46,7 +79,54 @@
 
     </div>
   </div> <!-- end brawl-card barbarian-->
-{% endfor %} <!--
+{% endfor %}
+
+<div class="avg">
+  <div class="brawl-card">
+    <div class="brawl-card__unit-name2">Player Average</div>
+    <div class="brawl-card__unit-stats brawl-card__unit-stats--barbarian clearfix">
+      <div class="one-third">
+        <div class="stat">{{ind[0]}}</div>
+        <div class="stat-value">Average Trophies</div>
+      </div>
+
+      <div class="one-third">
+        <div class="stat">{{ind[1]}}</div>
+        <div class="stat-value">Average Rank</div>
+      </div>
+
+      <div class="one-third no-border">
+        <div class="stat">{{ind[2]}}</div>
+        <div class="stat-value">Average Power</div>
+      </div>
+
+    </div>
+  </div> <!-- end brawl-card barbarian-->
+</div>
+
+<div class="avg2">
+  <div class="brawl-card">
+    <div class="brawl-card__unit-name2">Overall Average</div>
+    <div class="brawl-card__unit-stats brawl-card__unit-stats--barbarian clearfix">
+      <div class="one-third">
+        <div class="stat">{{sd[0]}}</div>
+        <div class="stat-value">Average Trophies</div>
+      </div>
+
+      <div class="one-third">
+        <div class="stat">{{sd[1]}}</div>
+        <div class="stat-value">Average Rank</div>
+      </div>
+
+      <div class="one-third no-border">
+        <div class="stat">{{sd[2]}}</div>
+        <div class="stat-value">Average Power</div>
+      </div>
+
+    </div>
+  </div> <!-- end brawl-card barbarian-->
+</div>
+ <!--
   <div class="brawl-card barbarian">
     <div class="brawl-card__image brawl-card__image">
       <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian.png" alt="barbarian" />

@@ -527,11 +527,21 @@ def brawler_map_showdown_analysis(tag):
     return sp,showdown_performance
 
 def geta_avg_bd(tag):
-    cur.execute("SELECT * FORM avg_braw_id('{}')".format(tag))
+    cur.execute("SELECT * FROM avg_braw_ind('{}')".format(tag))
     ind_avg = cur.fetchall()
     cur.execute("SELECT * FROM avg_braw()")
     oall_avg = cur.fetchall()
-    return ind_avg,oall_avg
+    o = []
+    a = []
+    for i in ind_avg:
+        o.append(float(i[0]))
+        o.append(float(i[1]))
+        o.append(float(i[2]))
+    for i in oall_avg:
+        a.append(float(i[0]))
+        a.append(float(i[1]))
+        a.append(float(i[2]))
+    return o,a
 
 # def brawler_map_showdown_analysis_new(tag,bname):
 #     cur.execute("SELECT * FROM showdown_brawler_performance('{}') WHERE bname = '{}'".format(tag,bname))

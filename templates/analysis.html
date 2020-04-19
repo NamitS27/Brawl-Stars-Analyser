@@ -1,4 +1,3 @@
-<!-- Replace it to analysis.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,14 +83,14 @@
   <p style="left: 50%; text-align: center; font-size: 40px">Performance Analysis</p>  
   <div class="row" style="align-items: center;align-self: center; height: 400px;">
     <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left: 10%; top: 20%; font-size: 24px;">
-      {{gen[0]}}  
+      Overall Winrate : {{gen[0]}}  
     </div>
-    <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left: 10%; top: 20%; font-size: 24px;">
-      <div class="teamteam" style="height: 40%; float: top; padding-bottom: 20px;"> {{gen[1]}}</div>
+    <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left: 5%; top: 20%; font-size: 20px;">
+      <div class="teamteam" style="height: 40%; float: top; padding-bottom: 20px;">Team Events Winrate : {{gen[1]}}</div>
       <div class="teamteam" style="height: 40%; float: top; padding: 50px 5px;"> 
-        <div style="height: 33%;">{{gen[2]}}</div>
-        <div style="height: 33%; padding-top: 30px; padding-left: 100px;">{{gen[3]}}</div>
-        <div style="height: 33%; padding-left: 100px;">{{gen[4]}}</div>
+        <div style="height: 33%;">Showdown Winrate : {{gen[2]}}</div>
+        <div style="height: 33%; padding-top: 30px; padding-left: 0px;">Solo Showdown Winrate : {{gen[3]}}</div>
+        <div style="height: 33%; padding-left: 0px;">Duo Showdown Winrate : {{gen[4]}}</div>
       </div>
     </div>
   </div>
@@ -163,8 +162,9 @@
     
   </div>
   </div>
-  <div class="obt_data" id="okoko">
-    <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left:20%;width: 50%;border: 1px solid rgba(255,255,255,0.3)" id="tabl1">
+  <div class="obt_data" id="okoko" style="width: 100%;height: 300px;background-color: #7827C4; color:#fff">
+    <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left:20%;width: 50%;" id="tabl1">
+      <p style="font-size: 24px; padding: 20px 100px;">Team Events</p>
       {% if flag %}
         <table style="width:50%;table-layout: fixed;height: auto;overflow: auto;margin-top: 0px;border: 1px;" cellpadding="0" cellspacing="0" border="0">
           <thead>
@@ -188,7 +188,8 @@
         </table>
       {% endif %}
     </div>
-    <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left:20%;width: 50%; border: 1px solid rgba(255,255,255,0.3)" id="tabl2">
+    <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left:20%;width: 50%;" id="tabl2">
+      <p style="font-size: 24px; padding: 20px 100px;">Showdown</p>
       {% if flag2 %}
         <table style="width:50%;table-layout: fixed;height: auto;overflow: auto;margin-top: 0px;border: 1px;" cellpadding="0" cellspacing="0" border="0">
           <thead>

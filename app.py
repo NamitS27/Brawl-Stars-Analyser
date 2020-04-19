@@ -10,7 +10,7 @@ def check_email(email):
 
 app = Flask(__name__)
 
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjJhMTM2M2MwLThiMWMtNDY2Mi05ODUwLTMzZWRiN2NlZWY3OCIsImlhdCI6MTU4NzI2MTE2NSwic3ViIjoiZGV2ZWxvcGVyL2IwZDZiNDk4LTFlYWMtMTM1Ni1hMTllLTYwZTlmMzQ0YmY3NCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTU3LjMyLjIzOC43OCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.kgGTMGchCjrVznII7HLWmMXsZRHZnDYy8Gj4N71SxMn-BnFLE_VldVOSLTlVXrpqTKibLAUdFn3kxKw_HwsJ4A'
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImIwZjQ4MzRmLTBiMzctNGM0MS04MDRiLTIyN2RjZGUzMzhjYSIsImlhdCI6MTU4NzMwNTAwNCwic3ViIjoiZGV2ZWxvcGVyL2IwZDZiNDk4LTFlYWMtMTM1Ni1hMTllLTYwZTlmMzQ0YmY3NCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMjcuNjEuMTMyLjE5NSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.3oikvdNS0QfZEkIS1L7f1VWt4FQRQ01J-Y1AC-HCHqem8iHai_mQfVhbIGEmaytoZqXliH11bcNLC66T1L6JFQ'
 
 global conn
 
@@ -117,10 +117,9 @@ def signup():
             try:
                 cur.execute(qu)
                 conn.commit()
-                return render_template('animatelogin.html',flag=flag)    
             except:
                 flag = 2
-                return render_template('animatelogin.html',flag=flag)
+            return render_template('animatelogin.html',flag=flag)
         else:
             return render_template('animatelogin.html',flag=2)    
 
@@ -271,19 +270,9 @@ def page_analysis():
         y = int(y)
     flag = get_team_map_analysis(tem,x) #Table1
     if y<3:
-        flag2 = showdowni_map_analysis(user,y-1)    #Table2 for individual showdown
+        flag2 = showdowni_map_analysis(user,y)    #Table2 for individual showdown
     else:
-        flag2 = showdowni_map_analysis(user)        
-    # else:
-    # # x = request.form.get('team_data')
-    # x='oookoko'
-    # # y = request.form.get('sd_data')
-    # y = 'lmlmlkkkl'
-    # lis = [['apple','banana','mokey'],['popey','dds','sadsad'],['dads','sdsad','asdsad','sdasad'],['sadsad','sada','sadsad','sadsa'],['asdsa','ssdad','sadsad']]
-    # global flag
-    # flag = [x,y]
-    # flag.append(x)
-    # flag.append(y)
+        flag2 = showdowna_map_analysis(user)        
     return jsonify(flag=flag,flag2=flag2)
 
 
@@ -305,7 +294,7 @@ def new_analysis():
         z = int(z)
         pla = get_brawler_map_team_analysis(page_tem,x,y) #Table1
         if z<3:
-            pla2 = get_brawler_map_ind_showdown_analysis(page_tem3[z-1],w)    #Table2 for individual showdown
+            pla2 = get_brawler_map_ind_showdown_analysis(page_tem3[z],w)    #Table2 for individual showdown
         else:
             pla2 = get_brawler_map_showdown_analysis(page_tem2,w)
     print(pla)
@@ -333,14 +322,10 @@ def send(table):
     global tem
     global user
     temp = " "
-    # user = "#P0VYR22V"
-    # lis = ['gemgrab','brawlBall','Bounty','heist']
-    # lis = [['apple','banana','mokey'],['popey','dds','sadsad'],['dads','sdsad','asdsad','sdasad'],['sadsad','sada','sadsad','sadsa'],['asdsa','ssdad','sadsad']]
     if table == 'no':
         # run(token,user)
         flag = None
         flag2 = None
-        temp = "helloworld"
         gen = overall_analysis(user)
         lis,tem = team_map_analysis(user)
 
@@ -371,7 +356,7 @@ def doit(table):
         # run(token,user)
         pla = None
         pla2 = None
-        temp = "helloworld"
+        # temp = "helloworld"
         page_lis = brawler_analysis(user)
         page_gen,page_flag,page_tem = brawler_map_team_analysis(user)
         page_flag2,page_tem2 = brawler_map_showdown_analysis(user)

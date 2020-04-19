@@ -74,7 +74,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>     
 
-<body style="width: 100%;background-size:auto">
+<body style="width: 100%;background-size:auto; margin-right: 0px;">
 
 <!-- <h2>Custom Select</h2> -->
 <!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
@@ -115,7 +115,7 @@
       </tbody>
     </table>
   </div> 
-  <div class="titletopic" style="font-size: 30px; width: 100%; padding-top: 150px; padding-bottom: 50px; padding-left:750px; ">Analyse your Gameplay!!</div>
+  <div class="titletopic" style="font-size: 30px; width: 100%; padding-top: 150px; padding-bottom: 50px; padding-left:550px; ">Analyse your Gameplay!!</div>
   <div class="row" style="padding-top: 50px; padding-bottom: 200px;">
     <div class="col-lg-2 col-sm-2 col-xs-2" style="padding: 5px 10px; left: 20%;" >
       <div class="custom-selec" style="width:200px;" id="tdd">
@@ -166,32 +166,25 @@
       <div class="buttonn">
         <button class="btn btn-primary dropdown-toggle" type="button" onclick="analysee()"style="background-color: chocolate;" >GO
       </div>
-      <p>lis {{lis|safe}}</p>
-      <p>gen {{gen}}</p>
-      <p>genn {{genn}}</p>
-      <p>flag {{flag}}</p>
-      <p>pla {{pla}}</p>
-      <p>pla2 {{pla2}}</p> 
-      <p>tem2 {{tem2|safe}}</p>
-      <p>flag2 {{flag2}}</p>
-      <p>tem3 {{tem3|safe}}</p>
-      <p>temp {{temp}}</p>
     </div>
     
   </div>
 </div>
-  <div class="obt_data" id="okoko" style="width: 100%; height: 300px; background-color: #7827C4; color: #fff;">
-    <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left:20%;width: 50%;border: 1px solid rgba(255,255,255,0.3)" id="tabl1">
+  <div class="obt_data" id="okoko" style="width: 100%; height: 500px; background-color: #7827C4; color: #fff;">
+    <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left:10%;width: 50%;" id="tabl1">
+      <p style="font-size: 24px;padding: 30px 90px;">Team Events</p>
       {% if pla %}
         <table style="width:50%;table-layout: fixed;height: auto;overflow: auto;margin-top: 0px;border: 1px;" cellpadding="0" cellspacing="0" border="0">
           <thead>
             <tr>
-              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 1px 2px;">Map</th>
-              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 1px 2px;">Win Percentage</th>
+              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 15px 5px;">Map</th>
+              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 15px 5px;">Overall Win</th>
+              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 15px 5px;">Ind Win</th>
             </tr>
           </thead>
           <tbody>
           {% for i in pla %}
+            {% if i%}
               <tr>
                 <td style="text-align: center; vertical-align: middle; padding: 1px 2px;">
                   {{i[0]}}
@@ -203,18 +196,23 @@
                   {{i[2]}}
                 </td>
               </tr>
+            {% endif %}  
           {% endfor %}
           </tbody>
         </table>
       {% endif %}
     </div>
-    <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left:20%;width: 50%; border: 1px solid rgba(255,255,255,0.3)" id="tabl1">
+    <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left:10%;width: 50%;" id="tabl1">
+      <p style="font-size: 24px;padding: 30px 90px;">Showdown</p>
       {% if pla2 %}
         <table style="width:50%;table-layout: fixed;height: auto;overflow: auto;margin-top: 0px;border: 1px;" cellpadding="0" cellspacing="0" border="0">
           <thead>
             <tr>
-              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 1px 2px;">Map</th>
-              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 1px 2px;">Win Percentage</th>
+              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 15px 5px;">Map</th>
+              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 15px 5px;">Overall Rank1 Win</th>
+              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 15px 5px;">Overall Rank2 Win</th>
+              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 15px 5px;">Ind Rank1 Win</th>
+              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 15px 5px;">Ind Rank2 Win</th>
             </tr>
           </thead>
           <tbody>
@@ -261,7 +259,7 @@ function analysee(){
         },
         // dataType: 'json',
         success: function (data) {
-          // console.log(data.a);
+          console.log(data.a);
           window.location.href = "{{ url_for('doit', table='table') }}"
         }
     });
@@ -270,8 +268,8 @@ function analysee(){
 function change_session(){
   var value1 = document.getElementById("select_path").value;
   var value2 = document.getElementById("select_pathh").value;
-  // console.log(value1);
-  // console.log(value2);
+  console.log(value1);
+  console.log(value2);
   if(value1){
     html='';
     var geny = {{ gen | safe }};
@@ -291,8 +289,8 @@ function change_session(){
 function change_sessionn(){
   var value1 = document.getElementById("select_path").value;
   var value2 = document.getElementById("select_pathh").value;
-  // console.log(value1);
-  // console.log(value2);
+  console.log(value1);
+  console.log(value2);
   if(value2){
     html='';
     if (value2==3){

@@ -118,6 +118,14 @@ body {
   bottom:10%;
 }
 
+.brawl-card__unit-name2 {
+  font-size: 30px;
+  color: #6713C1;
+  font-weight: 900;
+  margin-bottom: 0px;
+  padding: 30px;
+}
+
 .brawl-card__unit-description {
   padding: 20px;
   margin-bottom: 10px;
