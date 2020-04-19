@@ -10,7 +10,7 @@ def check_email(email):
 
 app = Flask(__name__)
 
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImIwZjQ4MzRmLTBiMzctNGM0MS04MDRiLTIyN2RjZGUzMzhjYSIsImlhdCI6MTU4NzMwNTAwNCwic3ViIjoiZGV2ZWxvcGVyL2IwZDZiNDk4LTFlYWMtMTM1Ni1hMTllLTYwZTlmMzQ0YmY3NCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMjcuNjEuMTMyLjE5NSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.3oikvdNS0QfZEkIS1L7f1VWt4FQRQ01J-Y1AC-HCHqem8iHai_mQfVhbIGEmaytoZqXliH11bcNLC66T1L6JFQ'
+token = ''
 
 global conn
 
@@ -299,16 +299,6 @@ def new_analysis():
             pla2 = get_brawler_map_showdown_analysis(page_tem2,w)
     print(pla)
     print(pla2)                 
-    # else:
-    # # x = request.form.get('team_data')
-    # x='oookoko'
-    # # y = request.form.get('sd_data')
-    # y = 'lmlmlkkkl'
-    # lis = [['apple','banana','mokey'],['popey','dds','sadsad'],['dads','sdsad','asdsad','sdasad'],['sadsad','sada','sadsad','sadsa'],['asdsa','ssdad','sadsad']]
-    # global flag
-    # flag = [x,y]
-    # flag.append(x)
-    # flag.append(y)
     return jsonify(pla=pla,pla2=pla2)    
 
 
@@ -336,7 +326,6 @@ def send(table):
 def doit(table):
     global page_flag
     global page_flag2
-    # print(flag)
     global page_lis
     global page_gen
     global page_tem
@@ -347,16 +336,11 @@ def doit(table):
     page_genn = []
     page_tem3 = []
     temp = " "
-    # user = "#22G90CY9P"
     global pla
     global pla2
-    # lis = ['gemgrab','brawlBall','Bounty','heist']
-    # lis = [['apple','banana','mokey'],['popey','dds','sadsad'],['dads','sdsad','asdsad','sdasad'],['sadsad','sada','sadsad','sadsa'],['asdsa','ssdad','sadsad']]
     if table == 'no':
-        # run(token,user)
         pla = None
         pla2 = None
-        # temp = "helloworld"
         page_lis = brawler_analysis(user)
         page_gen,page_flag,page_tem = brawler_map_team_analysis(user)
         page_flag2,page_tem2 = brawler_map_showdown_analysis(user)

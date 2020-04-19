@@ -76,9 +76,6 @@
 
 <body style="width: 100%">
 
-<!-- <h2>Custom Select</h2> -->
-
-<!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
 <div class="analysis-constainer" style="width: 100%;background-color: #7827C4; color: #fff;">
   <p style="left: 50%; text-align: center; font-size: 40px">Performance Analysis</p>  
   <div class="row" style="align-items: center;align-self: center; height: 400px;">
@@ -103,21 +100,6 @@
                 <option  value="{{ i }}">{{ i }}</option>                 
             {% endfor %}
         </select>
-        <!-- <select id="tddd" name="favorites">
-          <option value=0>Select car:</option>
-          <option value=1>Audi</option>
-          <option value=2>BMW</option>
-          <option value=3>Citroen</option>
-          <option value=4>Ford</option>
-          <option value=5>Honda</option>
-          <option value=6>Jaguar</option>
-          <option value=7>Land Rover</option>
-          <option value=8>Mercedes</option>
-          <option value=9>Mini</option>
-          <option value=10>Nissan</option>
-          <option value=11>Toyota</option>
-          <option value=12>Volvo</option>
-        </select> -->
       </div>
     </div>
     <div class="col-lg-4 col-sm-4 col-xs-4" style="padding: 5px 10px; left: 20%;">
@@ -136,24 +118,6 @@
       </select>
     </div>
   </div>
-  <!-- <div class="col-lg-3 col-sm-3 col-xs-3" style="padding: 5px 10px; left: 20%;">
-    <div class="custom-selec" style="width:200px;" id="ddc">
-      <select id="dddc" class="valid_brawlers">
-        <option value=0>Select car:</option>
-      </select>
-    </div>
-  </div> -->
-    <!-- <div class="col-lg-4 col-sm-4 col-xs-4" style="padding: 5px 10px; left: 20%;">
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id = "dd">Showdown Type
-          <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li><a href="#">Solo Showdown</a></li>
-            <li><a href="#">Duo Showdown</a></li>
-            <li><a href="#">Both</a></li>
-          </ul>
-        </div>
-    </div> -->
     <div class="col-lg-4 col-sm-4 col-xs-4" style="padding: 5px 10px; left: 20%;">
       <div class="buttonn">
         <button class="btn btn-primary dropdown-toggle" type="button" onclick="analyse()" style="background-color: chocolate;"> GO</button>
@@ -235,10 +199,6 @@ function analyse(){
         }
   });
 }
-
-/*if the user clicks anywhere outside the select box,
-then close all select boxes:*/
 </script>
-
 </body>
 </html>
