@@ -4,77 +4,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='materialize/css/materialize.min.css')}}"/>
-    <link rel="stylesheet" href="{{url_for('static',filename='css/player.css')}}" />
-    <script type="text/javascript" src="{{url_for('static', filename='materialize/js/materialize.min.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='materialize/js/materialize.js')}}"></script>
-    <!-- <title>Player Info</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='materialize/css/materialize.min.css')}}"/>
+  <link rel="stylesheet" href="{{url_for('static',filename='css/player.css')}}" />
+  <script type="text/javascript" src="{{url_for('static', filename='materialize/js/materialize.min.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='materialize/js/materialize.js')}}"></script>
+  <!-- <title>Player Info</title>
 </head>
 <body>
-    <h1 style="align-content: center;"> Player Profile</h1> -->
-    <!-- <link rel="stylesheet" href="D:\Academics\ICT-Sem4\DBMS\Project\Game_Analyser\static\css\player.css" /> -->
-    <section>
-      <nav>
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Player Details</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            {% if fla2 > 0 %}
-              <li><a href="/battles">Battle Log</a></li>
-            {% endif %}  
-            <li><a href="/brawler">Brawler Info</a></li>
-            {% if flag>0 %}
-              <li><a href="/club">Club Info</a></li>
-            {% endif %}  
-          </ul>
-        </div>
-      </nav>
+  <h1 style="align-content: center;"> Player Profile</h1> -->
+  <!-- <link rel="stylesheet" href="D:\Academics\ICT-Sem4\DBMS\Project\Game_Analyser\static\css\player.css" /> -->
+  <section>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Player Details</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          {% if fla2 > 0 %}
+            <li><a href="/battles">Battle Log</a></li>
+          {% endif %}  
+          <li><a href="/brawler">Brawler Info</a></li>
+          {% if flag>0 %}
+            <li><a href="/club">Club Info</a></li>
+          {% endif %} 
+          <li><a href="/new_analysis/no">Custom Analysis</a></li>
+          <li><a href="/no">Analysis</a></li>
+        </ul>
+      </div>
+    </nav>
+  </section>
+  <section>
+      <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tbody>
+              {% for i in d %}
+                  <tr>
+                      <td>{{i[0]}}</td>
+                      <td>{{i[1]}}</td>
+                  </tr>
+              {% endfor %} 
+          </tbody>
+        </table>
+      </div>
+      <!-- <form action="http://localhost:5000/brawler" method="GET">
+          <nav>
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo">Player Details</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/brawler">Brawler Info</a></li>
+                <li><a href="/club">Club Info</a></li>
+              </ul>
+            </div>
+          </nav>
+          <!-- <button name="brawler_info" onclick="testmet()">Brawler Info</button> -->
+          <!-- <button name="club_info" onclick="club_det()">Club Info</button> -->
+      <!-- </form> --> 
+      <!-- <section class="navsec"> -->
+      <!-- <form action="http://localhost:5000/club" method="GET"> -->
+          <!-- <button name="brawler_info" onclick="testmet()">Brawler Info</button> -->
+          <!-- <button name="club_info" onclick="club_det()">Club Info</button> -->
+      <!-- </form> -->
+      <!-- </section> -->
+      <script type="text/javascript" src="{{url_for('static',filename='materialize/js/materialize.min.js')}}"></script>
     </section>
-    <section>
-        <div class="tbl-header">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-              <tr>
-                <th>Attribute</th>
-                <th>Value</th>
-              </tr>
-            </thead>
-          </table>
-        </div>
-        <div class="tbl-content">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <tbody>
-                {% for i in d %}
-                    <tr>
-                        <td>{{i[0]}}</td>
-                        <td>{{i[1]}}</td>
-                    </tr>
-                {% endfor %} 
-            </tbody>
-          </table>
-        </div>
-        <!-- <form action="http://localhost:5000/brawler" method="GET">
-            <nav>
-              <div class="nav-wrapper">
-                <a href="#" class="brand-logo">Player Details</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                  <li><a href="/brawler">Brawler Info</a></li>
-                  <li><a href="/club">Club Info</a></li>
-                </ul>
-              </div>
-            </nav>
-            <!-- <button name="brawler_info" onclick="testmet()">Brawler Info</button> -->
-            <!-- <button name="club_info" onclick="club_det()">Club Info</button> -->
-        <!-- </form> --> 
-        <!-- <section class="navsec"> -->
-        <!-- <form action="http://localhost:5000/club" method="GET"> -->
-            <!-- <button name="brawler_info" onclick="testmet()">Brawler Info</button> -->
-            <!-- <button name="club_info" onclick="club_det()">Club Info</button> -->
-        <!-- </form> -->
-        <!-- </section> -->
-        <script type="text/javascript" src="{{url_for('static',filename='materialize/js/materialize.min.js')}}"></script>
-      </section>
-      
+    
 <!--     
 </body>
 </html> -->

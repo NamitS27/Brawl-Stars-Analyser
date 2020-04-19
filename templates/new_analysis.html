@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<style>
+/*the container must be positioned relative:*/
+.custom-select {
+  position: relative;
+  font-family: Arial;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element:*/
+}
+
+.select-selected {
+  background-color: DodgerBlue;
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>     
+
+<body style="width: 100%;background-size:auto">
+
+<!-- <h2>Custom Select</h2> -->
+<!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
+<div class="analysis-constainer" style="width: 100%;background-color: #7827C4; color: #fff;">
+  <p style="left: 50%; text-align: center; font-size: 40px;">Custom Analysis</p>  
+  <!-- <div class="row" style="align-items: center;align-self: center; height: 400px;">
+    <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left: 20%; top: 20%;">
+      Overall Win Rate
+    </div>
+    <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left: 20%; top: 20%;">
+      <div class="teamteam" style="height: 40%; float: top;"> Team Win Rate</div>
+      <div class="teamteam" style="height: 40%; float: top;"> 
+        <div style="height: 33%;">Showdown Win Rate</div>
+        <div style="height: 33%; left: 50%;">Duo Win</div>
+        <div style="height: 33%; left: 50%;">Solo Win</div>
+      </div>
+    </div>
+  </div> -->
+  <div class="performancee" style="border: 1px solid rgba(255,255,255,0.3); padding-left: 450px;"> 
+    <table style="width: 75%; table-layout: fixed; left: 50%;" cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr style="align-self: center;">
+          <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 10px 12px; font-size: 24px; border: 3px solid;">Brawler</th>
+          <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 10px 12px; font-size: 24px; border: 3px solid;">Overall Win Percent</th>
+          <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 10px 12px; font-size: 24px; border: 3px solid;">Individual Win Percent</th>
+        </tr>
+      </thead>
+    </table>
+    <table style="width:75%;table-layout: fixed;height: auto;overflow: auto;margin-top: 0px;" cellpadding="0" cellspacing="0" border="0">  
+      <tbody>
+        {% for i in lis %}
+          <tr>
+            <td style="text-align: center; vertical-align: middle; padding: 5px 5px;border-bottom: solid 1px rgba(255,255,255,0.1); font-size:18px;border: 2px solid;">{{i[0]}} </td>
+            <td style="text-align: center; vertical-align: middle; padding: 5px 5px;border-bottom: solid 1px rgba(255,255,255,0.1); font-size:18px;border: 2px solid;">{{i[1]}} </td>
+            <td style="text-align: center; vertical-align: middle; padding: 5px 5px;border-bottom: solid 1px rgba(255,255,255,0.1); font-size:18px;border: 2px solid;">{{i[2]}} </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div> 
+  <div class="titletopic" style="font-size: 30px; width: 100%; padding-top: 150px; padding-bottom: 50px; padding-left:750px; ">Analyse your Gameplay!!</div>
+  <div class="row" style="padding-top: 50px; padding-bottom: 200px;">
+    <div class="col-lg-2 col-sm-2 col-xs-2" style="padding: 5px 10px; left: 20%;" >
+      <div class="custom-selec" style="width:200px;" id="tdd">
+        <select onchange="change_session()" name="select_path" id="select_path" style="background-color: chocolate; height: 50px; width: 200px;">
+            <option  selected value="">Select Game Mode:</option>
+            {% for i in gen%}
+                <option  value="{{ i }}">{{ i }}</option>                 
+            {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-2 col-sm-2 col-xs-2" style="padding: 5px 10px; left: 20%;">
+      <div class="custom-selec" style="width:200px;" id="ddc">
+        <select id="dddc" class="valid_brawlers" style="background-color: chocolate; height: 50px; width: 200px;">
+          <option selected value=0>Select brawler:</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-2 col-sm-2 col-xs-2" style="padding: 5px 10px; left: 20%;" >
+      <div class="custom-selec" style="width:200px;" id="tdd">
+        <select onchange="change_sessionn()" name="select_pathh" id="select_pathh" style="background-color: chocolate; height: 50px; width: 200px;">
+            <option  selected value=0>Select Showdown Type:</option>
+            <option  value=1>Solo Showdown</option>
+            <option  value=2>Duo Showdown</option>
+            <option  value=3>Both</option>                 
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-2 col-sm-2 col-xs-2" style="padding: 5px 10px; left: 20%;">
+      <div class="custom-selec" style="width:200px;" id="ddc">
+        <select id="dddcc" class="valid_brawlerss" style="background-color: chocolate; height: 50px; width: 200px;">
+          <option selected value=0>Select brawler:</option>
+        </select>
+      </div>
+    </div>
+    <!-- <div class="col-lg-4 col-sm-4 col-xs-4" style="padding: 5px 10px; left: 20%;">
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id = "dd">Showdown Type
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Solo Showdown</a></li>
+            <li><a href="#">Duo Showdown</a></li>
+            <li><a href="#">Both</a></li>
+          </ul>
+        </div>
+    </div> -->
+    <div class="col-lg-2 col-sm-2 col-xs-2" style="padding: 5px 10px; left: 20%;">
+      <div class="buttonn">
+        <button class="btn btn-primary dropdown-toggle" type="button" onclick="analysee()"style="background-color: chocolate;" >GO
+      </div>
+      <p>lis {{lis|safe}}</p>
+      <p>gen {{gen}}</p>
+      <p>genn {{genn}}</p>
+      <p>flag {{flag}}</p>
+      <p>pla {{pla}}</p>
+      <p>pla2 {{pla2}}</p> 
+      <p>tem2 {{tem2|safe}}</p>
+      <p>flag2 {{flag2}}</p>
+      <p>tem3 {{tem3|safe}}</p>
+      <p>temp {{temp}}</p>
+    </div>
+    
+  </div>
+</div>
+  <div class="obt_data" id="okoko" style="width: 100%; height: 300px; background-color: #7827C4; color: #fff;">
+    <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left:20%;width: 50%;border: 1px solid rgba(255,255,255,0.3)" id="tabl1">
+      {% if pla %}
+        <table style="width:50%;table-layout: fixed;height: auto;overflow: auto;margin-top: 0px;border: 1px;" cellpadding="0" cellspacing="0" border="0">
+          <thead>
+            <tr>
+              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 1px 2px;">Map</th>
+              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 1px 2px;">Win Percentage</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for i in pla %}
+              <tr>
+                <td style="text-align: center; vertical-align: middle; padding: 1px 2px;">
+                  {{i[0]}}
+                </td>
+                <td style="text-align: center; vertical-align: middle; padding: 1px 2px;">
+                  {{i[1]}}
+                </td>
+                <td style="text-align: center; vertical-align: middle; padding: 1px 2px;">
+                  {{i[2]}}
+                </td>
+              </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    </div>
+    <div class="col-lg-6 col-sm-6 col-xs-6" style="padding: 5px 10px; left:20%;width: 50%; border: 1px solid rgba(255,255,255,0.3)" id="tabl1">
+      {% if pla2 %}
+        <table style="width:50%;table-layout: fixed;height: auto;overflow: auto;margin-top: 0px;border: 1px;" cellpadding="0" cellspacing="0" border="0">
+          <thead>
+            <tr>
+              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 1px 2px;">Map</th>
+              <th style="text-transform: uppercase; text-align: center; vertical-align: middle; padding: 1px 2px;">Win Percentage</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for i in pla2 %}
+              <tr>
+                <td style="text-align: center; vertical-align: middle; padding: 1px 2px;">
+                  {{i[0]}}
+                </td>
+                <td style="text-align: center; vertical-align: middle; padding: 1px 2px;">
+                  {{i[1]}}
+                </td>
+                <td style="text-align: center; vertical-align: middle; padding: 1px 2px;">
+                  {{i[2]}}
+                </td>
+                <td style="text-align: center; vertical-align: middle; padding: 1px 2px;">
+                  {{i[3]}}
+                </td>
+                <td style="text-align: center; vertical-align: middle; padding: 1px 2px;">
+                  {{i[4]}}
+                </td>
+              </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    </div>
+  </div>
+
+
+<script>
+function analysee(){
+  console.log(document.getElementById("select_path").value);
+  console.log(document.getElementById("dddc").value);
+  console.log(document.getElementById("select_pathh").value);
+  console.log(document.getElementById("dddcc").value);
+  $.ajax({
+        url: "{{ url_for('new_analysis') }}",
+        type: "POST",
+        data: {
+              team_data: document.getElementById("select_path").value,
+              team_dataa: document.getElementById("dddc").value,
+              sd_data: document.getElementById("select_pathh").value,
+              sd_dataa: document.getElementById("dddcc").value,
+        },
+        // dataType: 'json',
+        success: function (data) {
+          // console.log(data.a);
+          window.location.href = "{{ url_for('doit', table='table') }}"
+        }
+    });
+}
+
+function change_session(){
+  var value1 = document.getElementById("select_path").value;
+  var value2 = document.getElementById("select_pathh").value;
+  // console.log(value1);
+  // console.log(value2);
+  if(value1){
+    html='';
+    var geny = {{ gen | safe }};
+    var flagg = {{ flag | safe}};
+    for (let i=0; i<geny.length; i++) {
+      if (geny[i]==value1){
+          for(let j=0; j<flagg[i].length; j++){
+            html+='<option  value="'+ flagg[i][j] +'">'+ flagg[i][j] +'</option>'
+          }  
+      }
+    }
+    document.getElementById("dddc").innerHTML = html;
+  }
+ 
+}
+
+function change_sessionn(){
+  var value1 = document.getElementById("select_path").value;
+  var value2 = document.getElementById("select_pathh").value;
+  // console.log(value1);
+  // console.log(value2);
+  if(value2){
+    html='';
+    if (value2==3){
+      var flagg2 = {{flag2 | safe}};
+      for(let j=0; j<flagg2.length; j++){
+        html+='<option  value="'+ flagg2[j] +'">'+ flagg2[j] +'</option>'
+      }  
+      document.getElementById("dddcc").innerHTML = html;
+    }
+    else{
+      var genn2 = {{genn | safe}};
+      for(let j=0; j<genn2[value2-1].length; j++){
+        html+='<option  value="'+ genn2[value2-1][j] +'">'+ genn2[value2-1][j] +'</option>'
+      }  
+      document.getElementById("dddcc").innerHTML = html;
+    }  
+  }
+ 
+}
+/*if the user clicks anywhere outside the select box,
+then close all select boxes:*/
+</script>
+
+</body>
+</html>

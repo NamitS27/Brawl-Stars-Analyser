@@ -1,16 +1,10 @@
 from get_data import *
-from flask import Flask, redirect, url_for, request, render_template, jsonify
+from flask import Flask, redirect, url_for, request, render_template,jsonify
 import psycopg2
-import requests
-
-def check_email(email):
-    if requests.get("https://isitarealemail.com/api/email/validate",params = {'email':email}).json()['status']=="valid":
-        return True 
-    return False
 
 app = Flask(__name__)
 
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjJhMTM2M2MwLThiMWMtNDY2Mi05ODUwLTMzZWRiN2NlZWY3OCIsImlhdCI6MTU4NzI2MTE2NSwic3ViIjoiZGV2ZWxvcGVyL2IwZDZiNDk4LTFlYWMtMTM1Ni1hMTllLTYwZTlmMzQ0YmY3NCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTU3LjMyLjIzOC43OCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.kgGTMGchCjrVznII7HLWmMXsZRHZnDYy8Gj4N71SxMn-BnFLE_VldVOSLTlVXrpqTKibLAUdFn3kxKw_HwsJ4A'
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjZmNjU0ZmExLTVmOTktNDEwOS1iZGEzLWYxN2ZiMjM2N2Y3MyIsImlhdCI6MTU4NzI5ODE3MSwic3ViIjoiZGV2ZWxvcGVyL2Q3M2ExZDFhLTFlOTQtMzQ1Mi1iODViLTFjZTA3NTc2YTVmZCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTU3LjMyLjg4LjE4MyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.SfLISgmG816d5Hqro8byC2_mJj9wS6Tuuw9sX9M2QHk2lqd3vZhviRKOvwHl1AV1nGESkTVX9YTYUhd6BYonWA'
 
 global conn
 
@@ -22,6 +16,9 @@ except:
 cur = conn.cursor()
 
 user = None
+tem = None
+gen = None
+
 
 def fformat(p):
     l = []
@@ -100,7 +97,7 @@ def check_battle():
     xx = cur.fetchall()
     if len(xx)==0:
         return 0
-    else: 
+    else:
         return 1    
 
 @app.route('/signup',methods=['POST','GET'])
@@ -111,7 +108,7 @@ def signup():
         email = request.form['regmail']
         pwd = request.form['regpass']
         repwd = request.form['reregpass']
-        if pwd==repwd and check_email(email):
+        if pwd==repwd:
             qu = "INSERT INTO USERDATA values('"+email+"','"+user+"','"+pwd+"');"
             flag=0
             try:
@@ -227,37 +224,17 @@ def testmet():
 
 @app.route('/club',methods=['POST','GET'])
 def club_det():
-    quer1 = "SELECT club_tag from club_members where player_tag = '{}'".format(user)
-    cur.execute(quer1)
-    get_ct = cur.fetchall()
-    get_ct = list(get_ct[0])
-    query2 = "SELECT * from club where club_tag = '{}'".format(str(get_ct[0]))
-    cur.execute(query2)
-    club_det = cur.fetchall()
-    cd = list(club_det[0])
-    final_club = "SELECT * FROM club_members WHERE club_tag = '{}'".format(str(get_ct[0]))
-    cur.execute(final_club)
-    cmd = cur.fetchall()
+    quer1 = "SELECT club_t"
     # plyer = client.get_player(user)
     # l,ll,tag, name, name_colour, role, trophies = club_detai(plyer)
     # number_of_players = len(ll)
-    return render_template('club_details.html', det=cd, dd=cmd)
+    # return render_template('club_details.html', det=l, dd=ll, player_number=number_of_players, tag=tag, name=name, name_colour=name_colour, role=role, trophies=trophies)
 
+
+# user = None
 flag = None
-tem = None
-gen = None
-flag2 = None
-pla = None
-pla2 = None
-page_flag = None
-page_flag2 = None
-page_lis = None
-page_gen = None
-page_tem = None
-page_genn = None
-page_tem2 = None
-page_tem3 = None
-lis = None
+
+# plyer = brawlstats.officialapi.models.Player() 
 
 @app.route('/analys',methods=['POST','GET'])
 def page_analysis():
@@ -307,9 +284,7 @@ def new_analysis():
         if z<3:
             pla2 = get_brawler_map_ind_showdown_analysis(page_tem3[z-1],w)    #Table2 for individual showdown
         else:
-            pla2 = get_brawler_map_showdown_analysis(page_tem2,w)
-    print(pla)
-    print(pla2)                 
+            pla2 = get_brawler_map_showdown_analysis(page_tem2,w)         
     # else:
     # # x = request.form.get('team_data')
     # x='oookoko'
@@ -333,7 +308,7 @@ def send(table):
     global tem
     global user
     temp = " "
-    # user = "#P0VYR22V"
+    user = "#P0VYR22V"
     # lis = ['gemgrab','brawlBall','Bounty','heist']
     # lis = [['apple','banana','mokey'],['popey','dds','sadsad'],['dads','sdsad','asdsad','sdasad'],['sadsad','sada','sadsad','sadsa'],['asdsa','ssdad','sadsad']]
     if table == 'no':
@@ -362,7 +337,7 @@ def doit(table):
     page_genn = []
     page_tem3 = []
     temp = " "
-    # user = "#22G90CY9P"
+    user = "#22G90CY9P"
     global pla
     global pla2
     # lis = ['gemgrab','brawlBall','Bounty','heist']
@@ -389,6 +364,5 @@ def doit(table):
 def start():
     return render_template('animatelogin.html',flag=0)
 
-
 if __name__=='__main__':
-    app.run(debug=True)        
+    app.run(debug=True)    

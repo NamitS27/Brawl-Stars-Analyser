@@ -6,7 +6,7 @@
 body {
   background: -webkit-gradient(linear, left top, left bottom, from(#8c7a7a), color-stop(65%, #af877c), to(#af877c)) fixed;
   background: linear-gradient(to bottom, #8c7a7a 0%, #af877c 65%, #af877c 100%) fixed;
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/coc-background.jpg") no-repeat center center fixed;
+  background: url("https://i.redd.it/ybl5ahmqj0341.jpg") no-repeat center center fixed;
   background-size: cover;
   font: 12px/20px "Lato", Arial, sans-serif;
   color: #9E9E9E;
@@ -74,7 +74,7 @@ body {
 }
 
 .brawl-card__image {
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian-bg.jpg");
+  background: url("https://i.redd.it/ybl5ahmqj0341.jpg");
 }
 .brawl-card__image img {
   width: 400px;
@@ -123,24 +123,24 @@ body {
 }
 
 .brawl-card__unit-stats--barbarian {
-  background: #EC9B3B;
+  background: #EFBBFF;
   border-bottom-left-radius: 14px;
   border-bottom-right-radius: 14px;
 }
 
 
 .brawl-card__unit-stats--barbar {
-  background: #914c4c;
+  background: #7827C4;
   height: 70px;
   border-top-left-radius: 14px;
   border-top-right-radius: 14px;
 }
 
-.brawl-card__unit-stats--barbarian .one-half {
-  border-right: 1px solid #BD7C2F;
+/* .brawl-card__unit-stats--barbarian .one-half { */
+  /* border-right: 1px solid #BD7C2F;
   border-left: 1px solid #BD7C2F;
-  border-bottom: 1px solid #BD7C2F;
-}
+  border-bottom: 1px solid #BD7C2F; */
+/* } */
 
 /* .brawl-card__unit-stats--barbarian .one-third {
   border-right: 1px solid #BD7C2F;
@@ -200,15 +200,19 @@ body {
 }
 
 .brawl-card__unit-stats .tit {
+  text-transform: uppercase;
   width: 80%;
+  font-size: 36px;
   float: left;
-  padding: 2px 15px;
+  padding: 23px 15px;
 }
 
 .brawl-card__unit-stats .titu {
+  text-transform: uppercase;
+  font-size: 20px;
   width: 20%;
   float: left;
-  padding: 2px 15px;
+  padding: 25px 15px;
 }
 
 /* .brawl-card__unit-stats .one-thir {
@@ -253,13 +257,14 @@ body {
 
 .inf .bradet {
   top: 20px;
-  width: 16.66%;
+  width: 33.33%;
+  color: #7827C4;
   font-size: 12px;
-  height:78px;
+  height:20px;
   float: left;
-  border-right: 1px solid #9E9E9E;
+  /* border-right: 1px solid #9E9E9E; */
   /* background-color: #914c4c; */
-  padding: 1px 1px;
+  padding: 0px 0px;
 }
 
 .stat .imgstat {
@@ -267,6 +272,16 @@ body {
   height:155.09px;
   float: left;
   padding: 5px 5px;
+  /* border-image-outset: 7px 7px 7px 7px; */
+  /* border: 0.5em;
+  border-color: #82BB30; */
+  /* border-image: radial-gradient(#ff2, #55f) 40;
+  border-image-outset: 2px;  1.5 × 1.4rem = 2.1rem */
+}
+
+img {
+  border: 3px solid #7827C4;
+  border-radius: 5px
 }
 
 
@@ -275,30 +290,37 @@ body {
   /* height:155.09px; */
   float: top;
   padding: 2px 3px;
+  border-image-outset: 7px 7px 7px 7px;
 }
 
 .showd .imshowb {
   height: 20%;
   /* height:155.09px; */
+  font-size: 20px;
   float: top;
-  border-right: 1px solid #9E9E9E;
-  background-color: #914c4c;
-  padding: 2px 0px;
+  color: #7827C4;
+  /* border-right: 1px solid #9E9E9E; */
+  background-color: transparent;
+  padding: 30px 0px;
 }
 
 .stat-value .midd {
   /* width: 33%; */
   height:60%;
+  font-size: 40px;
   float: top;
-  padding: 0px 0px;
+  color: #7827C4;
+  padding: 100px 0px;
 }
 
 
 .stat-value .mii {
   /* width: 33%; */
+  font-size: 20px;
   height:40%;
   float: top;
-  padding: 5px 5px;
+  color: #7827C4;
+  padding: 10px 5px;
 }
 /* .one-half .stat-value {
   text-transform: uppercase;
@@ -339,15 +361,17 @@ body {
   position: relative;
   font-size: 24px;
   margin-bottom: 10px;
-  background-color: #914c4c;
+  /* background-color: #7827C4; */
   height: 80px;
 }
 
 .brawl-card__unit-stats .statr {
   position: relative;
-  font-size: 24px;
+  font-size: 36px;
+  color: #7827C4;
   margin-bottom: 10px;
   height: 80px;
+  padding: 0px;
 }
 
 .brawl-card__unit-stats .stat-value {

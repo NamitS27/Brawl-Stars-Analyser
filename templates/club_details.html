@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +11,10 @@
 <body>
 
 
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='materialize/css/materialize.min.css')}}"/>
-    <link rel="stylesheet" href="{{url_for('static',filename='css/player.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='css/player.css')}}"/>
     <script type="text/javascript" src="{{url_for('static', filename='materialize/js/materialize.min.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='materialize/js/materialize.js')}}"></script>
     <section>
@@ -29,36 +32,62 @@
 
 
 
-    <section>
-        <div class="tbl-header">
+    <section class="row">
+      <div class="tbl-header">
           <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
+                  <thead>
+                      <tr>
+                          <div class="col-xs-2">
+                              <th>Club Tag</th>
+                          </div>
+                          <div class="col-xs-2">
+                              <th>Name</th>
+                          </div>
+                          <div class="col-xs-2">
+                              <th>Trophies</th>
+                          </div>
+                          <div class="col-xs-2">
+                              <th>Type</th>
+                          </div>
+                          <div class="col-xs-2">
+                              <th>Required Trophies</th>
+                          </div>
+                          <div class="col-xs-2">
+                              <th>Description</th>
+                          </div>
+                      </tr>
+                  </thead>  
+          </table>
+      </div>
+      <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+          <tbody>
               <tr>
-                  <th>Club Tag</th>
-                  <th>Name</th>
-                  <th>Trophies</th>
-                  <th>Type</th>
-                  <th>Required Trophies</th>
-                  <th>Description</th>
+                  <div class="col-xs-2">
+                      <td>{{det[0]}}</td>
+                  </div>
+                  <div class="col-xs-2">
+                      <td>{{det[1]}}</td>
+                  </div>
+                  <div class="col-xs-2">
+                      <td>{{det[2]}}</td>
+                  </div>
+                  <div class="col-xs-2">
+                      <td>{{det[3]}}</td>
+                  </div>
+                  <div class="col-xs-2">
+                      <td>{{det[4]}}</td>
+                  </div>
+                  <div class="col-xs-2">
+                      <td>{{det[5]}}</td>
+                  </div>
+                  <div class="col-xs-2">
+                      <td>{{det[6]}}</td>
+                  </div>
               </tr>
-            </thead>
-          </table>
-        </div>
-        <div class="tbl-content">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <tbody>
-                    <tr>
-                        <td>{{det[0]}}</td>
-                        <td>{{det[1]}}</td>
-                        <td>{{det[2]}}</td>
-                        <td>{{det[3]}}</td>
-                        <td>{{det[4]}}</td>
-                        <td>{{det[5]}}</td>
-                        <td>{{det[6]}}</td>
-                    </tr>
-            </tbody>
-          </table>
-        </div>
+          </tbody>
+      </table>
+      </div>
         <script type="text/javascript" src="{{url_for('static',filename='materialize/js/materialize.min.js')}}"></script>
       </section>
 
@@ -81,13 +110,13 @@
         <div class="tbl-content">
           <table cellpadding="0" cellspacing="0" border="0">
             <tbody>
-                {% for i in range(0,player_number) %}
+                {% for i in dd %}
                     <tr>
-                        <td>{{tag[i][0]}}</td>
-                        <td>{{name[i][0]}}</td>
-                        <td>{{name_colour[i][0]}}</td>
-                        <td>{{role[i][0]}}</td>
-                        <td>{{trophies[i][0]}}</td>
+                        <td>{{i[1]}}</td>
+                        <td>{{i[2]}}</td>
+                        <td>{{i[3]}}</td>
+                        <td>{{i[4]}}</td>
+                        <td>{{i[5]}}</td>
                     </tr>
                 {% endfor %}
             </tbody>

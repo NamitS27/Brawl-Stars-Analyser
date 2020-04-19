@@ -365,7 +365,7 @@ def club_details(play):
         # print(x)
         # cur.execute("SELECT * FROM CLUB_MEMBERS WHERE club_tag = '"+club.tag+"'")
         # y = cur.fetchall()
-        # print(y)
+        # print(y
 
 def overall_analysis(tag):
     cur.execute("SELECT * from WIN_TEAM('{}')".format(tag))
@@ -424,6 +424,11 @@ def team_map_analysis(tag):
     modes = list(modes)
     return modes,team_event
 
+def team_map_analysis_new(tag,mode):
+    cur.execute("SELECT * FROM IND_MAP('{}') WHERE emode = '{}'".format(tag,mode))
+    team_event = cur.fetchall()
+    return team_event
+
 def get_team_map_analysis(data,mode):
     map_per = []
     for i in data:
@@ -471,6 +476,10 @@ def brawler_analysis(tag):
     brawler_performance = cur.fetchall()
     return brawler_performance
 
+# def brawler_map_team_analysis_new(tag,mode,bname):
+#     cur.execute("SELECT * FROM team_brawler_performance('{}') WHERE emode = '{}' and bn = '{}'".format(tag,mode,bname))
+#     return cur.fetchall()
+
 def brawler_map_team_analysis(tag):
     cur.execute("SELECT * FROM team_brawler_performance('{}')".format(tag))
     team_performance = cur.fetchall()
@@ -490,10 +499,10 @@ def brawler_map_team_analysis(tag):
                 if i[0]==j[0]:
                     temp.append(j[1])
             temp = set(temp)
+            temp = list(temp)
             mb.append(temp)
     m = set(m)
     m = list(m)
-    mb = list(mb)
     return m,mb,team_performance
 
 def get_brawler_map_team_analysis(data,mode,brawler):
@@ -517,6 +526,17 @@ def brawler_map_showdown_analysis(tag):
     sp = list(sp)
     return sp,showdown_performance
 
+def geta_avg_bd(tag):
+    cur.execute("SELECT * FORM avg_braw_id('{}')".format(tag))
+    ind_avg = cur.fetchall()
+    cur.execute("SELECT * FROM avg_braw()")
+    oall_avg = cur.fetchall()
+    return ind_avg,oall_avg
+
+# def brawler_map_showdown_analysis_new(tag,bname):
+#     cur.execute("SELECT * FROM showdown_brawler_performance('{}') WHERE bname = '{}'".format(tag,bname))
+#     return cur.fetchall()
+
 def get_brawler_map_showdown_analysis(data,bname):
     show_tab = []
     for i in data:
@@ -529,6 +549,11 @@ def get_brawler_map_showdown_analysis(data,bname):
             temp.append(i[5])
         show_tab.append(temp)
     return show_tab
+
+
+# def brawler_map_ind_showdown_analysis_new(tag,st,bname):
+#     cur.execute("SELECT * FROM showdown_ind_brawler_performance('{}',{}) WHERE bname = '{}'".format(tag,st,bname))
+#     return cur.fetchall()
 
 def brawler_map_ind_showdown_analysis(tag,st):
     cur.execute("SELECT * FROM showdown_ind_brawler_performance('{}',{})".format(tag,st))
@@ -567,3 +592,7 @@ def run(token,tag):
         print("BATTLE NUMBER : "+str(i+1))
         battle_log(battles[i],Tag)
     overall_analysis(Tag)
+    a,b,c = brawler_map_team_analysis("#{}".format(tag))
+    print(c)
+
+# run('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjJhMTM2M2MwLThiMWMtNDY2Mi05ODUwLTMzZWRiN2NlZWY3OCIsImlhdCI6MTU4NzI2MTE2NSwic3ViIjoiZGV2ZWxvcGVyL2IwZDZiNDk4LTFlYWMtMTM1Ni1hMTllLTYwZTlmMzQ0YmY3NCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTU3LjMyLjIzOC43OCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.kgGTMGchCjrVznII7HLWmMXsZRHZnDYy8Gj4N71SxMn-BnFLE_VldVOSLTlVXrpqTKibLAUdFn3kxKw_HwsJ4A','2LJYR2UU')
